@@ -54,6 +54,73 @@ Flag divergence. Produce remediation roadmap.
 1. [critical items first]
 ```
 
+
+## Process
+
+### Step 1: Scope the audit
+Determine what's being audited: single component, token set, or full system.
+Load only the relevant contracts — never all contracts for a single-component audit.
+
+### Step 2: Run checks per dimension
+For each of the 7 contract dimensions, verify the implementation matches:
+1. API: Props exist with correct types and defaults?
+2. Visual: All token references resolve? No hardcoded values?
+3. Accessibility: ARIA roles, keyboard, focus, screen reader?
+4. Composition: Correct slot usage? Valid nesting?
+5. Behavior: All states implemented? Transitions correct?
+6. Rules: Any don't violations? Forbidden compositions used?
+7. Platform: Correct imports, render elements, framework patterns?
+
+### Step 3: Score and classify
+- **Critical**: Breaks contract, a11y violation, blocked import. Must fix now.
+- **High**: Token violation, missing state, performance regression. Fix this sprint.
+- **Medium**: Naming inconsistency, missing test. Fix when touched.
+- **Low**: Nitpick, optional improvement. Author's discretion.
+
+### Step 4: Produce remediation roadmap
+Order findings by severity, group by component, estimate effort per fix.
+
+## Output format
+
+```markdown
+# Audit: [scope]
+## Summary: [pass/warn/fail] — [N] findings across [N] components
+
+## Findings
+
+### [CRITICAL] Token hardcoding — Button.tsx:42
+**Contract says:** `background: action.primary.bg`
+**Actual:** `background: '#4338ca'`
+**Fix:** Replace with `var(--action-primary-bg)` or token reference
+**Effort:** 5 minutes
+
+### [HIGH] Missing loading state — Dialog.tsx
+**Contract says:** Dimension 5 requires `loading` state
+**Actual:** No loading state implemented
+**Fix:** Add loading prop, spinner, aria-busy
+**Effort:** 2 hours
+
+## Remediation roadmap
+| Priority | Component | Finding | Effort |
+|----------|-----------|---------|--------|
+| 1 | Button | Token hardcoding | 5 min |
+| 2 | Dialog | Missing loading | 2 hrs |
+```
+
+## Example: Token audit
+
+Input: "Audit our color tokens for DTCG compliance"
+
+Process:
+1. Load `tokens/_schema.md` for naming conventions
+2. Load all `*.tokens.json` files
+3. Check: every token has `$value`, `$type`, and follows naming convention
+4. Check: semantic tokens reference primitives (not hardcoded values)
+5. Check: no orphaned tokens (defined but never referenced in contracts)
+
+Output: Compliance report with specific file:line references for every violation.
+
+
 ## Knowledge references
 
 | File | When to read |

@@ -44,6 +44,58 @@ validation. Avoid low-value work regardless of complexity.
 - [option A vs B with consequences of each]
 ```
 
+
+## Detailed process
+
+### Step 1: List all items
+Gather every candidate for prioritization. Include a one-line
+description and who requested it.
+
+### Step 2: Choose framework
+- RICE: best for comparing features with usage data
+- Value vs. Complexity: best for quick visual sorting
+- MoSCoW: best for sprint-level scoping with fixed deadline
+
+### Step 3: Score each item
+Apply the chosen framework. Be explicit about assumptions.
+If confidence is low, say so — don't fake precision.
+
+### Step 4: Sequence considering dependencies
+What unblocks other work? Foundation items (tokens, core contracts)
+before consumers. Platform items before features.
+
+### Step 5: Present tradeoffs for human decision
+You recommend, you don't decide. Present the data and the
+tradeoffs. Flag where reasonable people could disagree.
+
+## Output format
+
+```markdown
+# Prioritization: [scope]
+## Framework: RICE
+
+## Scored items
+| # | Item | Reach | Impact | Confidence | Effort | Score | Rank |
+|---|------|-------|--------|-----------|--------|-------|------|
+| 1 | Dark mode support | 5000 | 2 | 80% | 3 | 2667 | 1 |
+| 2 | DatePicker component | 2000 | 1 | 50% | 2 | 500 | 3 |
+| 3 | Accessibility audit fixes | 5000 | 2 | 100% | 1 | 10000 | — |
+
+Note: A11y audit fixes score highest but should be weighted
+against regulatory risk, not just RICE score.
+
+## Recommended sequence
+1. **A11y audit fixes** — unblocks compliance, highest impact
+2. **Dark mode** — high reach, enables token architecture improvement
+3. **DatePicker** — lower confidence, validate need first
+
+## Tradeoffs to discuss
+- Dark mode requires token migration chain. Do we have capacity?
+- DatePicker confidence is 50% — should we validate with research first?
+- A11y fixes have no customer-visible feature delivery. Stakeholder buy-in?
+```
+
+
 ## Knowledge references
 
 | File | When to read |

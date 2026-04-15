@@ -36,6 +36,82 @@ the four-layer architecture artifacts: DTCG tokens and YAML contracts.
 
 4. **Update** manifest tracking coverage
 
+
+## Detailed process
+
+### Step 1: Connect and assess
+Verify Figma Console MCP connection. Determine scope:
+- Full system extraction: `figma_get_design_system_kit`
+- Single component: `figma_get_component` with component key
+- Tokens only: `figma_get_variables`
+
+### Step 2: Extract raw data
+Pull component metadata including:
+- Component name, description, variant structure
+- Property definitions (type, default, options)
+- Token/variable references
+- Layer hierarchy and auto-layout specs
+- Accessibility annotations if present
+
+### Step 3: Transform to contract YAML
+Map extracted data to the 7-dimension contract schema:
+- Figma properties → Dimension 1 (API/props)
+- Figma variables/tokens → Dimension 2 (visual)
+- Figma a11y annotations → Dimension 3 (accessibility)
+- Figma layer hierarchy → Dimension 4 (composition)
+- Figma interaction specs → Dimension 5 (behavior)
+- Fill gaps with TODO markers for human review
+
+### Step 4: Validate and output
+Check generated contract against `_contract-schema.md`.
+Update `_index.md` with new/updated component entry.
+
+## Output format
+
+For each component extracted:
+```yaml
+# [component].contract.yaml — generated from Figma [date]
+# Source: [Figma file URL]
+# Coverage: [which dimensions were auto-populated vs TODO]
+
+component: TextField
+category: input
+description: "Single-line text input with label and validation"
+status: draft  # Always draft until human reviews
+
+props:
+  # ... populated from Figma properties
+tokens:
+  # ... populated from Figma variables
+accessibility:
+  # ... populated from annotations, or TODO if missing
+composition:
+  # ... populated from layer hierarchy
+behavior:
+  states: [idle, focus, filled, error, disabled]
+  # TODO: transitions need human specification
+rules:
+  # TODO: do/don't rules require human design judgment
+platform-notes:
+  figma:
+    component-name: "TextField"
+    file-key: "[extracted]"
+```
+
+## Example: Single component extraction
+
+Input: "Pull the TextField component from Figma"
+
+```
+1. figma_get_component(component_key="...")
+   → Returns: name, description, properties, variants, variables
+2. Map properties to props dimension
+3. Map variables to tokens dimension  
+4. Generate text-field.contract.yaml
+5. Update _index.md: TextField | draft | text-field.contract.yaml
+```
+
+
 ## Knowledge references
 
 | File | When to read |

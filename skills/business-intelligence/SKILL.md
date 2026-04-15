@@ -42,6 +42,61 @@ Metrics that must NOT be optimized at the expense of user experience:
 - Time on page when it indicates confusion, not engagement
 - Form completion when it indicates forced flow, not willingness
 
+
+## Detailed process
+
+### Step 1: Map components to business functions
+For each component in the contract index, identify which business
+function it primarily serves: conversion, engagement, retention, or trust.
+
+### Step 2: Identify metrics per function
+- Conversion: conversion rate, sign-up rate, checkout completion
+- Engagement: time on page, interactions per session, return visits
+- Retention: day-7/30 retention, churn rate, reactivation rate
+- Trust: support ticket rate, NPS, security incident rate
+
+### Step 3: Define experiment boundaries
+For each component, classify what's safe to experiment with:
+- Safe: color, copy, size, order, layout
+- Requires review: navigation, form flow, error handling
+- Never: accessibility features, security indicators, core interactions
+
+### Step 4: Define analytics hooks
+What events should be tracked? For each interactive component:
+- Render event (is it being shown?)
+- Interaction event (is it being used?)
+- Completion event (did the user finish the task?)
+- Error event (did something go wrong?)
+
+## Output format
+
+```markdown
+# Business intelligence: [component/feature]
+
+## Component-outcome mapping
+| Component | Business function | Primary metric | Current | Target |
+|-----------|------------------|---------------|---------|--------|
+| CTAButton | Conversion | Click-through rate | 3.2% | 4.5% |
+| OnboardingWizard | Retention | Day-7 retention | 42% | 55% |
+| TrustBadge | Trust | Support tickets/week | 15 | <8 |
+
+## Experiment plan: [specific experiment]
+**Hypothesis:** Changing CTA color from secondary to primary will
+increase click-through by 15%.
+**Safe to test:** Yes (color change only, no a11y impact)
+**Duration:** 2 weeks minimum for statistical significance
+**Anti-metric to watch:** Don't optimize click-through at the cost
+of downstream conversion (clicking more but buying less = bad)
+
+## Analytics events
+| Component | Event | Data fields | Priority |
+|-----------|-------|-------------|----------|
+| CTAButton | cta_rendered | page, variant, position | Required |
+| CTAButton | cta_clicked | page, variant, destination | Required |
+| CTAButton | cta_converted | page, variant, value | Required |
+```
+
+
 ## Knowledge references
 
 | File | When to read |

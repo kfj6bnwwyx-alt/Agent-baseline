@@ -58,6 +58,75 @@ severity, explain why it matters, and suggest the fix.
 - **Medium**: Style inconsistency, naming, missing tests
 - **Low**: Nitpick, optional optimization
 
+
+## Detailed process
+
+### Step 1: Load context
+Read the component's contract and the relevant code standards.
+Check tech-stack.md for blocked packages.
+
+### Step 2: Check each review layer
+
+**Layer 1 — Contract compliance:**
+- Do props match the contract types and defaults?
+- Are all contract-specified states implemented?
+- Do token mappings match the contract's Dimension 2?
+- Are a11y requirements from Dimension 3 met?
+
+**Layer 2 — Token discipline:**
+- Search for hardcoded hex colors, pixel values, font names
+- Every visual value should trace to a token reference
+- Flag any value that should be a token but isn't
+
+**Layer 3 — Blocked packages:**
+- `grep` for imports from blocked list
+- Check for indirect dependencies that pull in blocked packages
+
+**Layer 4 — Code standards:**
+- Named exports, TypeScript strict, consistent naming
+- Test co-location, file structure conventions
+
+**Layer 5 — Performance:**
+- Large component? Should it be lazy-loaded?
+- Unnecessary re-renders? Missing memoization?
+- Bundle size impact of new dependencies?
+
+**Layer 6 — Anti-patterns:**
+- Load `references/anti-patterns.md` for framework-specific checks
+- Props drilling, stale closures, missing keys
+
+### Step 3: Report with severity and fixes
+
+## Output format
+
+```markdown
+# Review: [file or PR]
+## Verdict: [approve/request-changes/block]
+## Stats: [N] findings — [N] critical, [N] high, [N] medium, [N] low
+
+### [CRITICAL] Blocked import — @mui/material
+**File:** `src/components/Dialog.tsx:1`
+**Issue:** Imports from blocked package. Contract requires system components.
+**Fix:** `import { Dialog } from '@system/ui'`
+
+### [HIGH] Hardcoded border-radius — Card.tsx:28
+**File:** `src/components/Card.tsx:28`
+**Code:** `borderRadius: '12px'`
+**Should be:** `borderRadius: tokens.radius.lg`
+**Why:** Hardcoded values won't update when tokens change
+
+### [MEDIUM] Missing error state — UserForm.tsx
+**Contract Dim 5:** requires error state
+**Actual:** Only idle and loading states handled
+**Fix:** Add error handling per contract behavior spec
+
+## What's good
+- Clean TypeScript types matching contract exactly
+- Accessible keyboard navigation in the dropdown
+- Good use of semantic tokens for dark mode support
+```
+
+
 ## Knowledge references
 
 | File | When to read |

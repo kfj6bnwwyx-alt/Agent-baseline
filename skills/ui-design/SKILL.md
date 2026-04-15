@@ -48,6 +48,91 @@ Visual specs should include:
 - Responsive behavior notes
 - Dark mode token alternates (if using semantic tokens correctly, this is automatic)
 
+
+## Detailed process
+
+### Step 1: Establish context
+What's the component or screen? Who's the audience?
+Load brand guidelines and relevant tokens.
+
+### Step 2: Map every state to tokens
+For each interactive state (idle, hover, focus, active, loading,
+disabled, error, success, empty), specify the exact token reference
+for every visual property that changes.
+
+### Step 3: Validate hierarchy
+Check that visual priority is clear:
+- One dominant element per section (size or weight or color)
+- Secondary elements visually recede (lighter weight, muted color)
+- Disabled elements are visually distinct without relying on color alone
+
+### Step 4: Dark mode verification
+If using semantic tokens correctly (action.primary.bg not indigo.600),
+dark mode works automatically. Flag any token that would need manual
+dark mode handling.
+
+### Step 5: Responsive considerations
+Note which visual properties change at breakpoints.
+Which tokens shift? Which elements reflow?
+
+## Output format
+
+```markdown
+# Visual spec: [component/screen]
+
+## Token mapping
+| Element | Property | Token | Light value | Dark value |
+|---------|----------|-------|-------------|------------|
+| Container | background | surface.primary | #FFFFFF | #1C1C1A |
+| Label | color | text.primary | #1A1A18 | #E8E7E3 |
+| Label | font-size | typography.fontSize.sm | 14px | 14px |
+
+## State treatments
+### hover
+| Property | Token change |
+|----------|-------------|
+| background | surface.primary → surface.primary-hover |
+
+### focus
+| Property | Token |
+|----------|-------|
+| ring | border.focus |
+| ring-offset | 2px (hardcoded, focus ring spec) |
+
+### disabled
+| Property | Token |
+|----------|-------|
+| background | surface.disabled |
+| text | text.disabled |
+| cursor | not-allowed |
+
+## Hierarchy check
+- Primary action: Button(primary) — highest contrast, largest target
+- Secondary info: Helper text — smallest size, muted color
+- Visual flow: top-to-bottom, label → input → helper → action
+```
+
+## Example: Card component visual spec
+
+Input: "Design the visual tokens for a Card component"
+
+```markdown
+## Token mapping
+| Element | Property | Token |
+|---------|----------|-------|
+| Container | background | surface.elevated |
+| Container | border | border.subtle |
+| Container | border-radius | radius.lg |
+| Container | padding | spacing.5 |
+| Container | shadow | elevation.sm |
+| Title | color | text.primary |
+| Title | font-size | typography.fontSize.lg |
+| Title | font-weight | typography.fontWeight.medium |
+| Description | color | text.secondary |
+| Description | font-size | typography.fontSize.md |
+```
+
+
 ## Knowledge references
 
 | File | When to read |

@@ -46,6 +46,83 @@ knowledge from the four-layer architecture.
 - State descriptions per screen
 - Pattern references (existing contracts) or new pattern proposals
 
+
+## Detailed process
+
+### Step 1: Understand the goal
+What is the user trying to accomplish? Load personas if available.
+Define success criteria: what does "done" look like for the user?
+
+### Step 2: Map the flow
+Sketch all screens/states. For each:
+- What data is shown?
+- What actions are available?
+- What components from the contract index are used?
+- What happens on success? On failure? On timeout?
+
+### Step 3: Handle edge cases
+For every screen: what happens with empty data? Maximum data?
+Slow connection? Interrupted flow? Back button? Browser refresh?
+
+### Step 4: Check pattern reuse
+Before designing custom solutions, check existing patterns in
+`knowledge-base/design-system/patterns/`. If this flow creates a
+new reusable pattern, propose it as a Layer 2b recipe.
+
+### Step 5: Specify behavior
+For interactive elements, define the state machine:
+states, transitions, triggers, and guards.
+
+## Output format
+
+```markdown
+# Flow: [name]
+## User goal: [what they accomplish]
+## Entry point: [how they arrive here]
+
+## Screen 1: [name]
+**Components:** Button(primary), TextField, Card
+**Data shown:** [what's displayed]
+**Actions:** [what the user can do]
+**States:**
+  - Empty: [what shows when no data]
+  - Loading: [skeleton or spinner]
+  - Populated: [normal view]
+  - Error: [what shows on failure]
+**Transitions:**
+  - Submit → Screen 2 (on success)
+  - Submit → Error state (on failure)
+  - Cancel → Previous screen
+
+## Error paths
+[Every way this flow can fail and what the user sees]
+
+## New patterns proposed
+- [name]: uses [Contract A] + [Contract B], composition rules: [...]
+```
+
+## Example: Login flow
+
+Input: "Design the login flow"
+
+```markdown
+# Flow: Authentication
+## User goal: Access their account
+## Entry point: Unauthenticated route redirect
+
+## Screen 1: Login form
+**Components:** TextField(type: email), TextField(type: password), Button(primary), Link
+**States:**
+  - Default: empty form, "Log in" button disabled until both fields valid
+  - Validating: button shows loading spinner, fields disabled
+  - Error: inline error below relevant field, form re-enabled
+**Transitions:**
+  - Valid submit → Validating → Dashboard (success) or Error state (failure)
+  - "Forgot password" link → Password reset flow
+  - "Sign up" link → Registration flow
+```
+
+
 ## Knowledge references
 
 | File | When to read |

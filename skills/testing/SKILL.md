@@ -39,6 +39,87 @@ For each component, produce:
 - `[Component].a11y.test.tsx` — accessibility tests (if complex)
 - Test plan summary as markdown
 
+
+## Detailed process
+
+### Step 1: Load the contract
+The contract IS the test spec. Every dimension is a test category.
+
+### Step 2: Write contract tests (highest priority)
+For each prop in Dimension 1:
+- Default value renders correctly
+- Each enum value renders a distinct variant
+- Required props produce errors when missing
+- Optional props work with and without values
+
+### Step 3: Write accessibility tests
+From Dimension 3:
+- Correct ARIA role applied
+- Keyboard interactions work (Enter, Space, Tab, Escape, Arrows)
+- Focus management follows spec (focus trap, focus return)
+- Screen reader announcements fire on state changes
+
+### Step 4: Write interaction tests
+From Dimension 5:
+- Each state transition works with correct trigger
+- Loading state disables interaction
+- Error state shows correct feedback
+- Animations respect prefers-reduced-motion
+
+### Step 5: Write composition tests
+From Dimension 4:
+- Valid children render correctly
+- Invalid children are handled gracefully
+- Nesting within approved parents works
+
+## Output format
+
+```typescript
+// Button.test.tsx
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Button } from './Button';
+
+describe('Button — Contract compliance', () => {
+  // Dimension 1: API
+  it('renders primary variant by default', () => {
+    render(<Button>Click</Button>);
+    expect(screen.getByRole('button')).toHaveClass('variant-primary');
+  });
+
+  it.each(['primary', 'secondary', 'ghost', 'destructive'] as const)(
+    'renders %s variant',
+    (variant) => {
+      render(<Button variant={variant}>Click</Button>);
+      expect(screen.getByRole('button')).toBeVisible();
+    }
+  );
+
+  // Dimension 3: Accessibility  
+  it('has minimum 44px touch target', () => {
+    render(<Button>Click</Button>);
+    const btn = screen.getByRole('button');
+    expect(btn.offsetHeight).toBeGreaterThanOrEqual(44);
+  });
+
+  it('uses aria-disabled instead of disabled attribute', () => {
+    render(<Button disabled>Click</Button>);
+    expect(screen.getByRole('button')).toHaveAttribute('aria-disabled', 'true');
+    expect(screen.getByRole('button')).not.toHaveAttribute('disabled');
+  });
+
+  // Dimension 5: Behavior
+  it('shows loading indicator and disables interaction', async () => {
+    const onClick = vi.fn();
+    render(<Button loading onClick={onClick}>Click</Button>);
+    await userEvent.click(screen.getByRole('button'));
+    expect(onClick).not.toHaveBeenCalled();
+    expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true');
+  });
+});
+```
+
+
 ## Knowledge references
 
 | File | When to read |

@@ -44,6 +44,64 @@ cases, and make ship/no-ship recommendations.
 **Contract reference:** [which contract rule is violated, if any]
 ```
 
+
+## Detailed process
+
+### Step 1: Load acceptance criteria
+From the product brief or user story. Each criterion is binary: pass or fail.
+
+### Step 2: Contract compliance check
+Load the component contract. Verify each dimension:
+- Are all props working as specified?
+- Do all states exist and transition correctly?
+- Is the component accessible per Dimension 3?
+
+### Step 3: Edge case discovery
+Systematically test:
+- **Empty data**: What happens with no content?
+- **Maximum data**: Longest possible text, most items, largest file
+- **Rapid action**: Double-click, rapid submit, spam the button
+- **Slow connection**: 3G simulation, timeout behavior
+- **Interrupted flow**: Close tab mid-action, lose connection, back button
+- **Browser variations**: Chrome, Firefox, Safari, mobile browsers
+- **RTL text**: Does layout flip correctly for Arabic/Hebrew?
+- **Screen sizes**: 320px to 2560px+ viewport width
+
+### Step 4: Regression check
+What else could this change break?
+Check components that compose with the changed component.
+Run existing test suite and flag new failures.
+
+### Step 5: Ship/no-ship recommendation
+
+## Output format
+
+```markdown
+# QA Report: [feature/component]
+## Recommendation: [ship/fix-and-reship/block]
+
+## Acceptance criteria
+| # | Criterion | Result | Evidence |
+|---|-----------|--------|----------|
+| 1 | User can submit the form | PASS | Tested Chrome, Firefox, Safari |
+| 2 | Error shown for invalid email | PASS | Shows inline error with fix guidance |
+| 3 | Loading state during submission | FAIL | No loading indicator shown |
+
+## Edge cases found
+### Double-submit sends duplicate requests
+**Severity:** High
+**Steps:** Click submit twice quickly
+**Expected:** Second click ignored during loading
+**Actual:** Two API requests sent
+**Fix:** Disable submit during loading state (contract Dim 5 requires this)
+
+## Regression check
+- [x] Existing form tests pass
+- [x] Dialog composition unaffected
+- [ ] Toast notification after submit — not tested (no test exists)
+```
+
+
 ## Knowledge references
 
 | File | When to read |

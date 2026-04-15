@@ -41,6 +41,100 @@ When evaluating architectural options:
 **Alternatives considered:** [What else we evaluated and why not]
 ```
 
+
+## Detailed process
+
+### Step 1: Clarify the decision
+What exactly needs deciding? What are the constraints?
+Load tech-stack.md for existing decisions and blocked approaches.
+
+### Step 2: Enumerate options
+List 2-4 realistic options. For each:
+- What does it look like?
+- What are the consequences (positive, negative, neutral)?
+- What's the reversibility (easy to change later, or locked in)?
+- What's the cost (implementation effort, ongoing maintenance)?
+
+### Step 3: Evaluate against criteria
+- Does it work within the tech stack constraints?
+- Does it conform to the four-layer architecture?
+- Is it the simplest option that meets the requirements?
+- What's the impact on existing consumers?
+
+### Step 4: Recommend and document
+Pick the best option. Document as an ADR.
+Flag if the decision needs broader review before accepting.
+
+## Output format
+
+```markdown
+# ADR-[NNN]: [Title]
+
+**Status:** proposed
+**Date:** [date]
+**Context:**
+We need to [decision needed] because [situation].
+Currently [how it works now]. This is causing [problem].
+
+**Decision:**
+Use [chosen approach] because [primary reason].
+
+**Consequences:**
+
+### Positive
+- [benefit with explanation]
+
+### Negative  
+- [tradeoff with explanation]
+- [mitigation for this tradeoff]
+
+### Neutral
+- [side effect]
+
+**Alternatives considered:**
+
+### [Option B]
+[What it is, why we didn't pick it — be specific about the downside]
+
+### [Option C]
+[What it is, why we didn't pick it]
+```
+
+## Example: Component library architecture
+
+Input: "Should we use web components or framework-specific components?"
+
+```markdown
+# ADR-001: Component implementation strategy
+
+**Status:** proposed
+**Context:**
+We need to support React, Angular, and SwiftUI from a single design system.
+Layer 2 contracts are framework-agnostic. The question is Layer 4 approach.
+
+**Decision:**
+Use framework-specific adapters (one package per framework) conforming to
+Layer 2 contracts. Not web components.
+
+**Consequences:**
+### Positive
+- Each framework gets idiomatic components (React hooks, Angular DI, SwiftUI modifiers)
+- No web component shadow DOM styling complexity
+- Smaller bundle per consumer (only their framework)
+
+### Negative
+- Must maintain N implementations instead of 1
+- Risk of drift between implementations (mitigated by contract tests)
+
+### Alternatives considered:
+### Web components
+Rejected: shadow DOM makes theming with design tokens difficult.
+Angular and React wrappers around web components add bundle weight
+and lose framework idioms. The maintenance savings don't materialize
+because you still need framework-specific wrappers.
+```
+
+
 ## Knowledge references
 
 | File | When to read |

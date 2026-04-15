@@ -45,6 +45,85 @@ For each component (NEW):
 5. Validate generated files include every contract's component
 6. Validate every preview manifest covers all 7 dimensions
 
+
+## Detailed process
+
+### Step 1: Inventory source artifacts
+Read `_index.md` to get full contract catalog.
+Read token files for L1 coverage.
+Note which blueprints have sufficient source data to generate.
+
+### Step 2: Generate each blueprint
+For each of the 7 blueprints, compile from contracts:
+
+**UX blueprint**: Aggregate Dimension 5 (behavior) across all contracts.
+Extract interaction patterns, state machines, transition rules.
+
+**UI blueprint**: Aggregate Dimension 2 (visual) + L1 tokens.
+Token hierarchy, layout rules, responsive specs.
+
+**Content blueprint**: Aggregate Dimension 6 (rules) for copy-related rules.
+Voice attributes, tone modulation, content patterns, terminology.
+
+**Accessibility blueprint**: Aggregate Dimension 3 across all contracts.
+Per-component a11y contracts, system-level rules, testing protocols.
+
+**Ethical blueprint**: Aggregate Dimension 6 prohibitions + ethical rules.
+Dark pattern prohibitions, inclusive design, privacy patterns.
+
+**Technical blueprint**: Aggregate Dimension 1 (API) + Dimension 7 (platform).
+TypeScript interfaces, composition rules, performance constraints.
+
+**BI blueprint**: Component-to-outcome mapping from product metrics.
+
+### Step 3: Generate IDE context files
+Compile blocked packages, import maps, replacement tables, code examples
+into `.windsurfrules`, `.cursorrules`, `CLAUDE.md` formats.
+
+### Step 4: Generate preview manifests
+One JSON file per component with all 7 dimensions for any preview renderer.
+
+### Step 5: Validate completeness
+Every contract's component must appear in technical + a11y blueprints at minimum.
+
+## Output format
+
+```
+.ai/context-engine/
+  ux-blueprint.yml
+  ui-blueprint.yml
+  content-blueprint.yml
+  accessibility-blueprint.yml
+  ethical-blueprint.yml
+  technical-blueprint.yml
+  business-intelligence-blueprint.yml
+  engine-manifest.yml
+  usage-guide.md
+```
+
+## Example: UX blueprint structure
+
+```yaml
+# ux-blueprint.yml
+patterns:
+  destructive-confirmation:
+    trigger: "User initiates destructive action"
+    components: [Dialog, Button]
+    states: [closed, open-idle, confirming, confirmed]
+    transitions:
+      - from: closed
+        to: open-idle
+        on: "destructive action initiated"
+    rules:
+      - "Confirm button is never default focus"
+selection_rules:
+  - intent: "User needs to confirm a destructive action"
+    use: destructive-confirmation
+    not: inline-undo
+    reason: "Irreversible actions require explicit confirmation"
+```
+
+
 ## Knowledge references
 
 | File | When to read |

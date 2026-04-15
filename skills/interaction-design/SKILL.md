@@ -51,6 +51,103 @@ success --timeout(2s)--> idle
 
 Every animation MUST specify a reduced-motion alternative.
 
+
+## Detailed process
+
+### Step 1: Identify the interaction
+What triggers it? What's the user's expectation?
+What feedback do they need?
+
+### Step 2: Define the state machine
+List all states. Draw every transition with trigger and guard conditions.
+Include error states and recovery paths.
+
+### Step 3: Specify timing
+For each transition that has motion:
+- Duration (ms)
+- Easing function
+- Affected properties (transform, opacity only — never width/height)
+- Reduced-motion alternative (instant cut or crossfade)
+
+### Step 4: Choreography (multi-element)
+If multiple elements animate together:
+- Define the sequence (stagger timing)
+- Which element leads, which follows
+- Maximum total duration for the full choreography
+
+### Step 5: Document for implementation
+Output must be precise enough that a developer implements it
+without asking questions about timing or behavior.
+
+## Output format
+
+```markdown
+# Interaction spec: [component/flow]
+
+## State machine
+```
+States: idle, hover, focus, active, loading, success, error
+Initial: idle
+
+idle → hover     [mouse-enter]
+idle → focus     [tab / programmatic focus]
+hover → active   [mouse-down]
+active → loading [async operation triggered]
+loading → success [complete, data.ok]
+loading → error   [complete, !data.ok]
+success → idle    [timeout 2s]
+error → idle      [dismiss or retry]
+```
+
+## Animation specs
+
+### hover → active
+| Property | From | To | Duration | Easing |
+|----------|------|----|----------|--------|
+| transform | scale(1) | scale(0.97) | 100ms | ease-out |
+| background | token.bg | token.bg-active | 100ms | ease-out |
+**Reduced motion:** Instant background change, no transform
+
+### idle → loading
+| Property | From | To | Duration | Easing |
+|----------|------|----|----------|--------|
+| content opacity | 1 | 0 | 150ms | ease-out |
+| spinner opacity | 0 | 1 | 150ms | ease-in (stagger 100ms) |
+| spinner rotation | 0deg | 360deg | 800ms | linear (loop) |
+**Reduced motion:** Hide content instantly, show static spinner (no rotation)
+
+## Choreography: Toast notification entry
+1. Translate from right: 0ms start, 250ms duration, ease-out
+2. Fade in: 0ms start, 200ms duration, ease-out
+3. Progress bar shrink: 300ms start, 5000ms duration, linear
+4. Auto-dismiss: fade out at 5000ms, 200ms duration, ease-in
+**Reduced motion:** Instant appear, instant dismiss after 5s
+```
+
+## Example: File upload flow
+
+Input: "Specify the interaction for a drag-and-drop file upload"
+
+```
+States: idle, drag-over, uploading, progress, success, error
+
+idle → drag-over    [file dragged over zone]
+drag-over → idle    [file dragged out without drop]
+drag-over → uploading [file dropped]
+uploading → progress  [upload started, progress events]
+progress → success    [upload complete]
+progress → error      [upload failed]
+error → idle          [dismiss error]
+success → idle        [timeout 3s or dismiss]
+
+Animation: drag-over
+- Border: dashed → solid, 150ms ease-out
+- Background: transparent → surface.info at 10% opacity, 150ms
+- Scale: 1 → 1.01, 200ms ease-out
+Reduced motion: border change only, no scale
+```
+
+
 ## Knowledge references
 
 | File | When to read |
