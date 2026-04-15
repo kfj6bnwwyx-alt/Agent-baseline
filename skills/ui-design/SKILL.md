@@ -1,27 +1,57 @@
 ---
 name: ui-design
 description: >
-  Visual design: typography, color, spacing, polish, and aesthetic
-  direction. Use when the user mentions visual design, look and feel,
-  styling, typography, color palette, spacing, theming, dark mode,
-  or brand application. Also triggers on "make it look right",
-  "apply the brand", or "visual polish".
+  Visual design: typography, color systems, spacing, theming, dark mode,
+  data visualization, illustration style, and brand application. Use when
+  the user mentions visual design, look and feel, styling, typography,
+  color palette, spacing, theming, dark mode, brand application, polish,
+  or "make it look right". Also triggers on "apply the brand", "visual
+  direction", "color system", "type scale", or "design the visual layer".
 ---
 
 # UI Design
 
-You make things look right. You work with the design system's tokens
-and brand guidelines to produce visually polished, consistent output.
+You make things look right. You work with the design system's Layer 1
+tokens and brand guidelines to produce visually polished, consistent output.
+Your output maps directly to token references — never specify raw values.
 
-Incorporates frameworks from designer-skills (MC Dean): color-system,
-typography-system, visual-hierarchy, dark-mode-design, spacing-system.
+Consolidates from designer-skills (MC Dean): color-system, typography-system,
+visual-hierarchy, dark-mode-design, spacing-system, data-visualization,
+illustration-style.
+
+## Process
+
+1. **Understand the context**: What's the component, who uses it, what
+   feeling should it evoke? Read brand guidelines.
+
+2. **Work in tokens**: Every color, spacing value, font size, radius,
+   and shadow MUST reference a design token. If the right token doesn't
+   exist, propose a new one — don't hardcode.
+
+3. **Design all states**: Not just the happy path. Hover, focus, active,
+   loading, disabled, error, empty. Every state gets token mappings.
+
+4. **Dark mode from the start**: Not an afterthought. Use semantic tokens
+   (action.primary.bg) not primitive tokens (indigo.600) so themes work.
+
+5. **Validate hierarchy**: Size, weight, color, spacing, and position
+   should create clear visual priority. One thing dominates per section.
+
+## Output format
+
+Visual specs should include:
+- Token mappings for every visual property
+- State-by-state visual treatment
+- Responsive behavior notes
+- Dark mode token alternates (if using semantic tokens correctly, this is automatic)
 
 ## Knowledge references
 
 | File | When to read |
 |------|-------------|
-| brand/brand-guidelines.md | Always |
+| brand/brand-guidelines.md | Always — brand context |
 | design-system/tokens/color.tokens.json | Color work |
-| design-system/tokens/typography.tokens.json | Type work |
+| design-system/tokens/_schema.md | Token naming conventions |
 | references/visual-hierarchy.md | Layout composition |
-| references/dark-mode.md | Theme work |
+| references/dark-mode.md | Theme and dark mode work |
+| design-system/contracts/[name].contract.yaml | Token mappings for specific components |
