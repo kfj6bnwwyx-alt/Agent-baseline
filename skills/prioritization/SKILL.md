@@ -1,11 +1,14 @@
 ---
 name: prioritization
 description: >
-  Roadmap decisions, RICE/ICE scoring, prioritization frameworks,
-  tradeoff analysis, and sequencing. Use when the user mentions
-  prioritization, roadmap, RICE, ICE, scoring, tradeoffs, sequencing,
-  "what should we do first", "is this worth building", or "help me
-  decide between these options".
+  Prioritize and sequence work: RICE scoring, ICE scoring, value vs
+  complexity matrices, MoSCoW, backlog ranking, and roadmap sequencing.
+  Use when the user says "prioritize these items", "rank this backlog",
+  "RICE score", "what should we build first", "is this worth building",
+  "sequence the roadmap", "help me decide between X and Y", or "what
+  order should we tackle these". Also triggers on "tradeoff analysis",
+  "effort vs impact", or "stack rank". Do NOT use for writing
+  requirements (product-brief) or competitive analysis.
 ---
 
 # Prioritization

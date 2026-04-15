@@ -1,12 +1,16 @@
 ---
 name: metadata-extraction
 description: >
-  Extract component metadata and design tokens from Figma using Figma
-  Console MCP, and transform into Layer 1 tokens and Layer 2 contracts.
-  Use when the user says "extract from Figma", "pull metadata", "sync
-  from Figma", "update contracts from design", or "get component specs".
-  Also triggers on "figma-to-code", "bridge Figma to contracts", or
-  references to Figma Console MCP operations.
+  Extract component metadata and design tokens from Figma using
+  Figma Console MCP. Pull component specs, variant structures,
+  token definitions, and layer hierarchies, then transform into
+  Layer 1 DTCG tokens and Layer 2 YAML contracts. Use when the
+  user says "pull from Figma", "extract component specs", "sync
+  tokens from Figma", "update contracts from Figma library", or
+  "get metadata via Console MCP". Also triggers on "Figma extraction",
+  "figma_get_component", or "figma_get_variables". Do NOT use for
+  generating context files from contracts (context-engine) or
+  generating implementation code (code-gen).
 ---
 
 # Metadata Extraction

@@ -1,12 +1,15 @@
 ---
 name: interaction-design
 description: >
-  Micro-animations, state machines, gesture design, transitions,
-  feedback loops, error recovery flows, and loading patterns. Use
-  when the user mentions interaction, animation, transition, state
-  machine, gesture, feedback, loading state, error handling UX,
-  or "how should this feel", "what happens when they tap", or
-  "design the transition between states".
+  Micro-animations, state machines, gesture patterns, transition
+  choreography, feedback loops, loading sequences, and reduced-motion
+  alternatives. Use when the user asks "how should this transition
+  feel", "state machine for this flow", "animation timing for hover",
+  "what happens when they tap X", "loading skeleton behavior",
+  "gesture for swiping", "feedback when action completes", or
+  "specify the motion". Also triggers on "easing curve", "duration",
+  "reduced motion", or "choreography". Do NOT use for visual styling
+  (ui-design) or user flow mapping (ux-design).
 ---
 
 # Interaction Design

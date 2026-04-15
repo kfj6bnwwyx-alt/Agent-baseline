@@ -1,11 +1,15 @@
 ---
 name: context-engine
 description: >
-  Generate AI context files (Layer 3) from design tokens and component
-  contracts. Use when the user says "generate context files", "rebuild
-  windsurfrules", "update CLAUDE.md", "sync Layer 3", "regenerate rules",
-  or "update AI context from contracts". Also triggers on "context engine",
-  "blocked packages", or "import maps".
+  Generate the seven context engine blueprints (UX, UI, content,
+  accessibility, ethical, technical, business intelligence) and AI
+  context files (.windsurfrules, .cursorrules, CLAUDE.md) from Layer 1
+  tokens and Layer 2 contracts. Use when the user says "generate
+  context files", "rebuild windsurfrules", "build the blueprints",
+  "update CLAUDE.md from contracts", "sync Layer 3", "regenerate
+  blocked package list", "update import maps", or "build the context
+  engine". Do NOT use for extracting from Figma (metadata-extraction)
+  or auditing health (design-system-audit).
 ---
 
 # Context Engine

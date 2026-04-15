@@ -1,12 +1,14 @@
 ---
 name: product-brief
 description: >
-  Write PRDs, requirements documents, user stories, acceptance criteria,
-  feature specifications, and epic definitions. Use when the user mentions
-  PRD, requirements, user stories, acceptance criteria, feature spec,
-  product definition, epic, or "define the feature". Also triggers on
-  "write requirements", "what should we build", "scope this feature",
-  or "acceptance criteria for".
+  Write PRDs, requirements documents, user stories with acceptance
+  criteria, feature specifications, and epic definitions. Use when
+  the user says "write a PRD", "define requirements", "acceptance
+  criteria for", "scope this feature", "user stories for", "epic
+  definition", or "what should we build and why". Also triggers on
+  "product spec", "feature definition", or "requirements document".
+  Do NOT use for implementation (code-gen), visual design (ui-design),
+  or competitive analysis (competitive-audit).
 ---
 
 # Product Brief

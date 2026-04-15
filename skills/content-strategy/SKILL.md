@@ -1,11 +1,15 @@
 ---
 name: content-strategy
 description: >
-  Information architecture, content audit, taxonomy design, content
-  planning, and content governance. Use when the user mentions IA,
-  information architecture, content audit, taxonomy, navigation
-  structure, content model, labeling, or "how should we organize
-  this content", "what's the right navigation", or "audit our content".
+  Information architecture, content structure, taxonomy design,
+  navigation labeling, content modeling, and content governance. Use
+  when the user asks about "information architecture", "IA audit",
+  "taxonomy for our docs", "navigation structure", "how to organize
+  content", "labeling system", "content model", or "site structure".
+  Also triggers on "card sort results", "tree testing", or "content
+  audit". Do NOT use for writing actual copy or UI text (voice, tone,
+  microcopy — those need a content-writing skill), visual styling
+  (ui-design), or implementation (code-gen).
 ---
 
 # Content Strategy

@@ -1,12 +1,15 @@
 ---
 name: architecture
 description: >
-  System design, data modeling, API design, technical architecture
-  decisions, and architecture decision records (ADRs). Use when the
-  user mentions architecture, system design, data model, database
-  schema, API design, technical decisions, ADRs, or scaling concerns.
-  Also triggers on "how should we structure this", "what's the right
-  pattern", or "technical approach for".
+  Technical architecture decisions, ADRs (architecture decision
+  records), system structure, data modeling, database schema choices,
+  API endpoint design, and technology selection. Use when the user
+  asks "should we use web components or framework-specific", "write
+  an ADR for", "what's the right technical approach", "data model for",
+  "API structure for", "choose between Radix vs building custom", or
+  any question about how to technically structure a system. Also
+  triggers on "tech decision", "system diagram", or "schema". Do NOT
+  use for implementing code (code-gen) or reviewing code (code-review).
 ---
 
 # Architecture

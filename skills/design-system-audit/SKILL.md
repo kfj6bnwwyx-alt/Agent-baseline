@@ -1,12 +1,16 @@
 ---
 name: design-system-audit
 description: >
-  Audit design system components, tokens, and patterns for compliance,
-  consistency, and health. Use when the user mentions audit, compliance,
-  drift, health check, token validation, naming consistency, component
-  coverage, or anything about checking whether implementations match
-  the design system. Also triggers on "how healthy is our system",
-  "what's out of date", or "check this component against the spec".
+  Audit design system components, tokens, and patterns for contract
+  compliance, naming consistency, token coverage, drift from
+  implementation, and overall system health. Use when the user says
+  "audit this component", "check token naming", "design system
+  health", "drift detection", "naming audit", "are we following
+  the contract", or "component compliance check". Also triggers on
+  "system-wide audit", "token coverage", or "how healthy is our
+  system". Do NOT use for writing new components (code-gen),
+  creating personas (user-research), or prioritizing work
+  (prioritization).
 ---
 
 # Design System Audit

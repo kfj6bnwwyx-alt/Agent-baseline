@@ -1,12 +1,15 @@
 ---
 name: accessibility-audit
 description: >
-  WCAG 2.2 AA accessibility auditing, ARIA pattern guidance, keyboard
-  navigation testing, screen reader optimization, and inclusive design.
-  Use when the user mentions accessibility, a11y, WCAG, ARIA, screen
-  reader, keyboard navigation, contrast, focus management, or inclusive
-  design. Also triggers on "is this accessible", "check a11y", or any
-  mention of disabilities or assistive technology.
+  WCAG 2.2 AA accessibility auditing, ARIA pattern validation,
+  keyboard navigation testing, screen reader optimization, cognitive
+  accessibility assessment, and inclusive design evaluation. Use when
+  the user asks "is this accessible", "WCAG audit", "check ARIA
+  attributes", "keyboard navigation for this component", "screen
+  reader testing", "contrast ratio check", "cognitive load assessment",
+  or "inclusive design review". Also triggers on "a11y", "assistive
+  technology", or "focus management". Do NOT use for visual layout
+  decisions (ui-design) or writing content (content-strategy).
 ---
 
 # Accessibility Audit

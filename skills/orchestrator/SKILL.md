@@ -1,13 +1,14 @@
 ---
 name: orchestrator
 description: >
-  Routes user requests to the correct skill or skill chain. Use this skill
-  for ANY multi-step workflow, cross-domain task, or request that touches 
-  more than one discipline (design + engineering, research + strategy, 
-  audit + remediation). Also activates when the user says "run the pipeline",
-  "full review", "end-to-end", "from research to code", or references
-  any defined chain by name. Do NOT use for single-domain tasks that a
-  specialist skill can handle directly.
+  Routes requests to the correct skill or skill chain when a task
+  spans multiple disciplines. Use ONLY for multi-step workflows that
+  explicitly require chaining skills together: "run the new-component
+  chain", "full end-to-end review", "from research to code", "run
+  the pipeline", "figma-to-code", or names a specific chain like
+  "feature-review" or "system-health". Also triggers on "pre-release
+  check across teams" or "sprint kickoff workflow". Do NOT use for
+  any single-discipline task — route directly to the specialist skill.
 ---
 
 # Orchestrator
@@ -53,6 +54,10 @@ and nothing else. Think of yourself as a context budget manager.
 | Technical docs, API docs, ADRs, onboarding | `documentation` | relevant templates |
 | Governance, contribution, deprecation, versioning | `governance` | full strategy doc + governance model |
 | Content strategy, IA, taxonomy, content audit | `content-strategy` | IA patterns |
+
+| Dark patterns, manipulation, inclusive design, consent, privacy | `ethical-design` | ethical blueprint |
+| UI copy, error messages, button labels, voice, tone, microcopy | `content-writing` | content blueprint + voice/tone |
+| Component metrics, A/B testing, analytics, business impact | `business-intelligence` | BI blueprint + metrics framework |
 
 ### Ambiguity resolution
 

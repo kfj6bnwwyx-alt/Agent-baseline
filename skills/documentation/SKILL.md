@@ -1,11 +1,15 @@
 ---
 name: documentation
 description: >
-  Technical documentation, API docs, onboarding guides, architecture
-  decision records, component documentation, and system-level docs.
-  Use when the user mentions documentation, docs, API docs, README,
-  onboarding, ADR, or "document this", "write the docs", or "how
-  do we explain this to new team members".
+  Write component documentation, API reference docs, onboarding
+  guides, architecture decision records, and design system-level
+  documentation. Use when the user says "write docs for this
+  component", "API documentation", "onboarding guide for new
+  engineers", "document this decision", "README for the system",
+  or "generate Figma MCP component descriptions". Also triggers on
+  "technical writing", "usage examples", or "docs site content".
+  Do NOT use for auditing components (design-system-audit) or
+  building components (code-gen).
 ---
 
 # Documentation

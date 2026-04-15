@@ -1,11 +1,15 @@
 ---
 name: competitive-audit
 description: >
-  Competitive analysis, market landscape mapping, feature benchmarking,
-  and capability gap analysis. Use when the user mentions competitive
-  analysis, competitor, benchmarking, market landscape, feature
-  comparison, gap analysis, or asks "what are others doing", "how do
-  we compare", or "who does this well".
+  Competitive analysis, benchmarking against specific competitors,
+  market landscape mapping, feature comparison matrices, and capability
+  gap analysis. Use when the user names competitors to compare against
+  (e.g. "benchmark against Figma, Notion, Linear"), asks "what are
+  competitors doing for X", "how do we compare to Y", "who does this
+  well in the market", or "feature comparison". Also triggers on
+  "landscape scan", "competitive gap", "market analysis", or
+  "audit what others are doing". Do NOT use for user research (personas,
+  interviews) or product requirements — those are separate skills.
 ---
 
 # Competitive Audit

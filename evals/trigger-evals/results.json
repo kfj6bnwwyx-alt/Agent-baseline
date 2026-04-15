@@ -1,0 +1,341 @@
+{
+  "orchestrator": {
+    "trig": "4/4",
+    "rej": "2/3",
+    "acc": 86,
+    "fails": [
+      [
+        "LEAK",
+        "Audit the Button component tokens",
+        [
+          "component"
+        ]
+      ]
+    ],
+    "dlen": 526
+  },
+  "design-system-audit": {
+    "trig": "5/5",
+    "rej": "3/4",
+    "acc": 89,
+    "fails": [
+      [
+        "LEAK",
+        "Create a user persona",
+        [
+          "user"
+        ]
+      ]
+    ],
+    "dlen": 573
+  },
+  "metadata-extraction": {
+    "trig": "4/4",
+    "rej": "2/3",
+    "acc": 86,
+    "fails": [
+      [
+        "LEAK",
+        "Generate React code for Dialog",
+        [
+          "code"
+        ]
+      ]
+    ],
+    "dlen": 605
+  },
+  "context-engine": {
+    "trig": "4/4",
+    "rej": "1/3",
+    "acc": 71,
+    "fails": [
+      [
+        "LEAK",
+        "Extract metadata from Figma",
+        [
+          "figma",
+          "metadata"
+        ]
+      ],
+      [
+        "LEAK",
+        "Audit design system health",
+        [
+          "system",
+          "health",
+          "audit",
+          "design"
+        ]
+      ]
+    ],
+    "dlen": 564
+  },
+  "code-gen": {
+    "trig": "4/4",
+    "rej": "1/3",
+    "acc": 71,
+    "fails": [
+      [
+        "LEAK",
+        "Review this Button code",
+        [
+          "review",
+          "code"
+        ]
+      ],
+      [
+        "LEAK",
+        "Write tests for Button",
+        [
+          "tests",
+          "write"
+        ]
+      ]
+    ],
+    "dlen": 568
+  },
+  "code-review": {
+    "trig": "4/4",
+    "rej": "2/3",
+    "acc": 86,
+    "fails": [
+      [
+        "LEAK",
+        "Run accessibility tests",
+        [
+          "tests"
+        ]
+      ]
+    ],
+    "dlen": 506
+  },
+  "ux-design": {
+    "trig": "4/4",
+    "rej": "3/3",
+    "acc": 100,
+    "fails": [],
+    "dlen": 396
+  },
+  "ui-design": {
+    "trig": "3/4",
+    "rej": "2/3",
+    "acc": 71,
+    "fails": [
+      [
+        "MISS",
+        "Make settings page visually consistent",
+        [
+          "page",
+          "settings",
+          "consistent",
+          "visually"
+        ]
+      ],
+      [
+        "LEAK",
+        "Design user flow for settings",
+        [
+          "user",
+          "design"
+        ]
+      ]
+    ],
+    "dlen": 562
+  },
+  "accessibility-audit": {
+    "trig": "5/5",
+    "rej": "2/3",
+    "acc": 88,
+    "fails": [
+      [
+        "LEAK",
+        "Design form layout",
+        [
+          "layout",
+          "design"
+        ]
+      ]
+    ],
+    "dlen": 582
+  },
+  "user-research": {
+    "trig": "5/5",
+    "rej": "3/3",
+    "acc": 100,
+    "fails": [],
+    "dlen": 376
+  },
+  "competitive-audit": {
+    "trig": "3/3",
+    "rej": "1/3",
+    "acc": 67,
+    "fails": [
+      [
+        "LEAK",
+        "Write requirements for a feature",
+        [
+          "feature",
+          "requirements"
+        ]
+      ],
+      [
+        "LEAK",
+        "Create user personas",
+        [
+          "user",
+          "personas"
+        ]
+      ]
+    ],
+    "dlen": 593
+  },
+  "product-brief": {
+    "trig": "4/4",
+    "rej": "1/3",
+    "acc": 71,
+    "fails": [
+      [
+        "LEAK",
+        "Design notification UI",
+        [
+          "ui",
+          "design"
+        ]
+      ],
+      [
+        "LEAK",
+        "Build notification component",
+        [
+          "build"
+        ]
+      ]
+    ],
+    "dlen": 501
+  },
+  "prioritization": {
+    "trig": "4/4",
+    "rej": "2/3",
+    "acc": 86,
+    "fails": [
+      [
+        "LEAK",
+        "Write requirements for chart component",
+        [
+          "requirements"
+        ]
+      ]
+    ],
+    "dlen": 525
+  },
+  "governance": {
+    "trig": "4/4",
+    "rej": "3/3",
+    "acc": 100,
+    "fails": [],
+    "dlen": 455
+  },
+  "testing": {
+    "trig": "3/3",
+    "rej": "3/3",
+    "acc": 100,
+    "fails": [],
+    "dlen": 330
+  },
+  "qa": {
+    "trig": "4/4",
+    "rej": "3/3",
+    "acc": 100,
+    "fails": [],
+    "dlen": 315
+  },
+  "interaction-design": {
+    "trig": "4/4",
+    "rej": "1/3",
+    "acc": 71,
+    "fails": [
+      [
+        "LEAK",
+        "Design layout of upload page",
+        [
+          "design"
+        ]
+      ],
+      [
+        "LEAK",
+        "Implement toast animation CSS",
+        [
+          "animation"
+        ]
+      ]
+    ],
+    "dlen": 564
+  },
+  "content-strategy": {
+    "trig": "4/4",
+    "rej": "2/3",
+    "acc": 86,
+    "fails": [
+      [
+        "LEAK",
+        "Design help center UI",
+        [
+          "ui",
+          "design"
+        ]
+      ]
+    ],
+    "dlen": 567
+  },
+  "documentation": {
+    "trig": "4/4",
+    "rej": "0/3",
+    "acc": 57,
+    "fails": [
+      [
+        "LEAK",
+        "Build Dialog component",
+        [
+          "component"
+        ]
+      ],
+      [
+        "LEAK",
+        "Audit Dialog against contract",
+        [
+          "audit"
+        ]
+      ],
+      [
+        "LEAK",
+        "Design Dialog interaction",
+        [
+          "design"
+        ]
+      ]
+    ],
+    "dlen": 525
+  },
+  "architecture": {
+    "trig": "4/4",
+    "rej": "1/3",
+    "acc": 71,
+    "fails": [
+      [
+        "LEAK",
+        "Write tests for theming",
+        [
+          "write"
+        ]
+      ],
+      [
+        "LEAK",
+        "Review theming code",
+        [
+          "review",
+          "code"
+        ]
+      ]
+    ],
+    "dlen": 597
+  }
+}

@@ -1,12 +1,15 @@
 ---
 name: code-review
 description: >
-  Review code for quality, consistency, and design system compliance.
-  Use when the user mentions code review, PR review, pull request,
-  refactoring, anti-patterns, code quality, linting, or asks to check
-  code against standards. Also triggers on "review this", "is this
-  code good", "what's wrong with this", or "clean this up". Do NOT
-  use for writing new code — that's code-gen.
+  Review existing code for quality, contract compliance, token
+  discipline, blocked package violations, and performance issues.
+  Use when the user says "review this code", "check this PR",
+  "is this following our standards", "find anti-patterns in this",
+  "this has hardcoded values", "refactor this", "clean up this
+  component", or "what's wrong with this implementation". Also
+  triggers on "code quality", "PR feedback", or "linting issues".
+  Do NOT use for writing new code (code-gen) or writing tests
+  (testing).
 ---
 
 # Code Review

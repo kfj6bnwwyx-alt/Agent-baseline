@@ -1,12 +1,15 @@
 ---
 name: ui-design
 description: >
-  Visual design: typography, color systems, spacing, theming, dark mode,
-  data visualization, illustration style, and brand application. Use when
-  the user mentions visual design, look and feel, styling, typography,
-  color palette, spacing, theming, dark mode, brand application, polish,
-  or "make it look right". Also triggers on "apply the brand", "visual
-  direction", "color system", "type scale", or "design the visual layer".
+  Visual design decisions: typography systems, color palettes,
+  spacing scales, theming, dark mode adaptation, visual hierarchy,
+  and brand application to interfaces. Use when the user asks about
+  "type scale", "color system", "dark mode tokens", "visual
+  consistency", "brand colors", "spacing rhythm", "make it look
+  polished", or "apply our visual language". Also triggers on
+  "visual direction", "look and feel", or "token mapping for
+  visual properties". Do NOT use for interaction flows (ux-design),
+  animation timing (interaction-design), or copy/content (content).
 ---
 
 # UI Design

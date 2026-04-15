@@ -1,13 +1,15 @@
 ---
 name: code-gen
 description: >
-  Generate component implementations, platform adapter code, and feature
-  builds that conform to design system contracts. Use when the user says
-  "implement", "build", "code", "create component", "generate", or wants
-  any component or feature turned into working code. Also triggers on
-  "adapter", "platform implementation", or framework-specific requests
-  like "React version of" or "SwiftUI version of". Do NOT use for code
-  review — that's a separate skill.
+  Generate production code: component implementations, platform
+  adapter code, and feature builds that conform to Layer 2 contracts.
+  Use when the user says "implement this component in React",
+  "generate the SwiftUI adapter", "build this from its contract",
+  "create the Angular version", "write the component code", or
+  any request to produce working code from a spec. Also triggers on
+  "scaffold", "boilerplate", or framework-specific requests like
+  "React version of" or "SwiftUI version of". Do NOT use for
+  reviewing existing code (code-review) or writing tests (testing).
 ---
 
 # Code Generation
