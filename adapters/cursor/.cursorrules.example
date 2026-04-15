@@ -1,0 +1,32 @@
+# Design Ops Kit — Cursor Rules
+# Copy to your project root as .cursorrules
+
+You are working within a design system that uses a four-layer architecture:
+1. Tokens (DTCG JSON) — knowledge-base/design-system/tokens/
+2. Contracts (YAML, 7 dimensions) — knowledge-base/design-system/contracts/
+3. Context files (generated) — produced by context-engine
+4. Adapters (platform code) — per-framework implementations
+
+## Rules
+- NEVER use MUI (@mui/*), Chakra (@chakra-ui/*), or shadcn
+- All visual values MUST reference design tokens
+- All components MUST conform to their Layer 2 contracts
+- Read the contract BEFORE implementing any component
+
+## When building a component
+1. Find the contract: knowledge-base/design-system/contracts/[name].contract.yaml
+2. Read the contract schema: knowledge-base/design-system/contracts/_contract-schema.md
+3. Implement all 7 dimensions (API, visual, a11y, composition, behavior, rules, platform)
+4. Include all states from Dimension 5
+5. Co-locate tests covering all variants
+
+## When reviewing code
+Follow skills/code-review/SKILL.md — 6-layer review process.
+
+## For detailed processes
+Each skill in skills/[name]/SKILL.md contains the full process with
+output formats and examples. Reference the relevant skill for complex tasks.
+
+## For multi-step workflows
+Chain definitions in orchestration/chains/ describe step-by-step
+workflows with context bridges between steps.
