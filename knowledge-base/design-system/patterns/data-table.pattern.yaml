@@ -1,0 +1,58 @@
+pattern: data-table-with-controls
+description: "Sortable, filterable data table with row actions and pagination"
+status: stable
+
+uses:
+  - Table
+  - TextField(type: search)
+  - Select
+  - Button
+  - Checkbox
+  - Pagination
+  - EmptyState
+
+composition:
+  layout:
+    - Toolbar: search + filters + bulk actions
+    - Column headers: sortable, resizable
+    - Data rows: selectable, expandable
+    - Row actions: contextual menu or inline buttons
+    - Footer: pagination + row count
+  responsive:
+    desktop: "full table with all columns"
+    tablet: "horizontal scroll with sticky first column"
+    mobile: "card list view (not table)"
+
+behavior:
+  sorting:
+    - "Click column header to sort asc, click again for desc, third click clears"
+    - "Only one sort column active at a time (unless explicitly multi-sort)"
+    - "Sort indicator (arrow) visible on active column"
+  selection:
+    - "Header checkbox selects all visible rows"
+    - "Shift+click for range selection"
+    - "Selection count shown in toolbar"
+    - "Bulk actions appear when ≥1 row selected"
+  pagination:
+    - "Show total count and current range ('1-25 of 482')"
+    - "Configurable page size (10, 25, 50, 100)"
+    - "Preserve sort and filter state across pages"
+
+accessibility:
+  role: table (semantic HTML table, not div grid)
+  aria-sort: "ascending/descending on sorted column header"
+  keyboard:
+    tab: "moves between interactive elements"
+    arrow-keys: "navigate between cells (optional, for data-heavy tables)"
+    space: "toggle row selection on focused row"
+  screen-reader: "column headers announced with each cell value"
+
+rules:
+  do:
+    - "Always show total row count"
+    - "Preserve user's sort/filter/page on navigation and back"
+    - "Support copy-paste of cell values"
+  dont:
+    - "Never paginate with fewer than 25 rows (show all)"
+    - "Never auto-refresh data without user consent"
+    - "Never use a table for layout — only for tabular data"

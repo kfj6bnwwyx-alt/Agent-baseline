@@ -270,6 +270,22 @@ custom builds):
 5. **Test trigger accuracy** — run 10 should-trigger, 10 should-not-trigger 
    prompts. If trigger rate is below 80%, improve the description.
 
+
+## Chain loading
+
+Chain definitions live in `orchestration/chains/`. Load the relevant
+chain file when a multi-step workflow is detected — do not rely on
+the inline chain summaries above. The chain files contain detailed
+step-by-step instructions, context bridge formats, and quality gates
+that the summaries omit.
+
+Available chains (load from `orchestration/chains/[name].chain.md`):
+- new-component, component-update, figma-to-code
+- feature-review, system-health, a11y-remediation
+- design-to-handoff, research-to-requirements
+- token-migration, sprint-kickoff
+- parity-check, contract-from-scratch, full-rebrand
+
 ## Knowledge references
 
 | File | When to read |
@@ -278,6 +294,7 @@ custom builds):
 | meta/layer-reference.md | When determining which layer a request targets |
 | orchestration/chains/*.chain.md | When user requests a multi-step workflow |
 | operations/handoff-spec-template.md | When generating context bridges |
+| orchestration/chains/[name].chain.md | When a specific chain is triggered — load that chain file |
 
 ## Conflict resolution
 

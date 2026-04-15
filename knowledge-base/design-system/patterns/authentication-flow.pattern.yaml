@@ -1,0 +1,52 @@
+pattern: authentication-flow
+description: "Complete sign-in, sign-up, and account recovery flow"
+status: stable
+
+uses:
+  - TextField(type: email)
+  - TextField(type: password)
+  - Button
+  - Link
+  - Checkbox
+  - Dialog
+
+composition:
+  screens:
+    login:
+      components: [TextField(email), TextField(password), Button(primary), Link, Checkbox]
+      actions: ["Log in", "Forgot password?", "Sign up", "Remember me"]
+    registration:
+      components: [TextField(email), TextField(password), TextField(confirm-password), Button(primary), Checkbox, Link]
+      actions: ["Create account", "Already have an account?", "Terms agreement"]
+    password-reset:
+      components: [TextField(email), Button(primary), Link]
+      actions: ["Send reset link", "Back to login"]
+    verification:
+      components: [TextField(code), Button(primary), Link]
+      actions: ["Verify", "Resend code"]
+
+behavior:
+  security:
+    - "Never reveal whether an email exists in the system"
+    - "Rate limit login attempts (lock after 5 failures)"
+    - "Password requirements shown before user types, not just on error"
+    - "Session timeout with graceful re-authentication (preserve context)"
+  states: [unauthenticated, authenticating, authenticated, locked, expired]
+
+accessibility:
+  password-toggle: "visibility toggle with aria-label 'Show password'/'Hide password'"
+  autocomplete: "email autocomplete='email', password autocomplete='current-password'"
+  error-messages: "linked via aria-describedby, never color-only"
+
+rules:
+  do:
+    - "Support SSO and passwordless options when available"
+    - "Auto-focus first empty field on page load"
+    - "Show password requirements proactively, not just on failure"
+  dont:
+    - "Never reveal 'email not found' — say 'incorrect email or password'"
+    - "Never clear password field on failed login"
+    - "Never force arbitrary password rules (no 'must include symbol')"
+  ethical:
+    - "Sign-up and sign-out must be equally easy to find"
+    - "Account deletion must be accessible from account settings"

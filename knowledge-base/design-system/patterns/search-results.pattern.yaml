@@ -1,0 +1,53 @@
+pattern: search-results
+description: "Displays filtered, sorted results with pagination or infinite scroll"
+status: stable
+
+uses:
+  - TextField(type: search)
+  - FilterBar
+  - ResultsList
+  - Pagination
+  - EmptyState
+  - Skeleton
+
+composition:
+  layout:
+    - Search input at top (sticky on scroll)
+    - Active filters shown as removable chips below search
+    - Sort control right-aligned above results
+    - Results list with consistent card or row format
+    - Pagination or load-more at bottom
+  responsive:
+    desktop: "filters as sidebar, results as main"
+    mobile: "filters as bottom sheet, results full-width"
+
+behavior:
+  states: [idle, searching, results, no-results, error, loading-more]
+  transitions:
+    idle → searching: "user types in search or applies filter"
+    searching → results: "results returned, count > 0"
+    searching → no-results: "results returned, count === 0"
+    searching → error: "search fails"
+    results → loading-more: "scroll to bottom or click load more"
+    loading-more → results: "additional results appended"
+  debounce: "300ms after last keystroke before executing search"
+  url-sync: "search query and filters reflected in URL for sharing"
+
+accessibility:
+  role: search (on form wrapper)
+  aria-live: "polite region announces result count on update"
+  keyboard:
+    escape: "clears search input"
+    tab: "moves through results sequentially"
+  screen-reader: "announces '[N] results found' after each search"
+
+rules:
+  do:
+    - "Show result count immediately ('24 results')"
+    - "Preserve search query on back navigation"
+    - "Show skeleton loading that matches result card shape"
+    - "Support keyboard navigation through results"
+  dont:
+    - "Never show a blank page while searching — show skeleton"
+    - "Never lose search context on pagination"
+    - "Never require exact match — support fuzzy search"

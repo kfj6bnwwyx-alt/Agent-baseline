@@ -1,0 +1,51 @@
+pattern: form-validation
+description: "Validates user input with inline feedback and submit gating"
+status: stable
+
+uses:
+  - TextField
+  - Button
+  - ErrorMessage
+
+composition:
+  flow:
+    - User fills fields
+    - Validation runs on blur (per field) and on submit (cross-field)
+    - Errors appear inline, adjacent to the field
+    - Submit button disabled only during submission, never during validation
+    - On submit failure, preserve all input and scroll to first error
+
+behavior:
+  states: [pristine, dirty, validating, valid, invalid, submitting, submitted, submit-error]
+  transitions:
+    pristine → dirty: "user types in any field"
+    dirty → validating: "field loses focus (blur)"
+    validating → valid: "field passes validation"
+    validating → invalid: "field fails validation"
+    valid → submitting: "user clicks submit, all fields valid"
+    submitting → submitted: "server accepts"
+    submitting → submit-error: "server rejects"
+    submit-error → dirty: "user modifies any field"
+  validation_timing:
+    on_blur: "format, length, required"
+    on_submit: "cross-field, server-side"
+    never_on_keystroke: "except character count and password strength"
+
+accessibility:
+  aria-describedby: "error message linked to field"
+  aria-invalid: "true when field is in error state"
+  aria-required: "on required fields, not just visual indicator"
+  focus-on-error: "move focus to first invalid field on submit"
+  error-announcement: "aria-live polite region for error count"
+
+rules:
+  do:
+    - "Preserve all user input on error — never clear the form"
+    - "Show errors inline next to the field, not just in a summary"
+    - "Error messages say what's wrong AND how to fix it"
+    - "Allow submission attempt even with client-side errors (server may accept)"
+  dont:
+    - "Never validate on every keystroke (except password strength)"
+    - "Never disable submit based on client validation (disable only during submission)"
+    - "Never show errors before user has interacted with the field"
+    - "Never use red color alone to indicate errors — add icon + text"

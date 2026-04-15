@@ -1,0 +1,55 @@
+pattern: onboarding-wizard
+description: "Multi-step progressive disclosure for first-time setup"
+status: stable
+
+uses:
+  - ProgressIndicator
+  - Button
+  - TextField
+  - Select
+  - Card
+  - Illustration
+
+composition:
+  layout:
+    - Progress indicator at top (steps with labels)
+    - Content area (one step's content at a time)
+    - Navigation: Back + Next/Continue + Skip (when allowed)
+    - Step content: focused, one concept per step
+  principles:
+    - "Max 5 steps — if more, you're asking too much upfront"
+    - "Each step has a clear, singular purpose"
+    - "Allow skip for non-essential steps"
+    - "Save progress — resumable if user leaves"
+
+behavior:
+  states: [not-started, in-progress, step-complete, all-complete, skipped]
+  transitions:
+    not-started → in-progress: "user starts onboarding"
+    in-progress → step-complete: "current step validated"
+    step-complete → in-progress: "advance to next step"
+    in-progress → skipped: "user clicks skip (if allowed)"
+    all-complete → done: "final step completed or skipped"
+  persistence:
+    - "Save progress after each step completion"
+    - "Resume from last incomplete step on return"
+    - "Allow back navigation to completed steps to edit"
+
+accessibility:
+  progress: "aria-valuenow, aria-valuemax on progress indicator"
+  step-announcement: "announce 'Step N of M: [title]' on each transition"
+  keyboard: "Tab through step content, Enter to advance"
+  focus: "move focus to step title on each transition"
+
+rules:
+  do:
+    - "Show what each step accomplishes before asking for input"
+    - "Celebrate completion (brief success state, not a modal)"
+    - "Allow re-entry to onboarding from settings"
+  dont:
+    - "Never block access to the product during onboarding"
+    - "Never ask for information you could infer or ask later"
+    - "Never make the last step feel like a dead end"
+  ethical:
+    - "Skip option must be visually equal to Continue (no misdirection)"
+    - "Data collection steps must state what the data is used for"

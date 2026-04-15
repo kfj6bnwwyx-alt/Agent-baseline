@@ -1,0 +1,23 @@
+{
+  "skill_name": "code-gen",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "[Add realistic test prompt for code-gen]",
+      "expected_output": "[Describe expected output format and content]",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "[Add second test prompt for code-gen]",
+      "expected_output": "[Describe expected output]",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "[Add edge case prompt for code-gen]",
+      "expected_output": "[Describe expected handling of edge case]",
+      "files": []
+    }
+  ]
+}

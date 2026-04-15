@@ -1,0 +1,23 @@
+{
+  "skill_name": "accessibility-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "[Add realistic test prompt for accessibility-audit]",
+      "expected_output": "[Describe expected output format and content]",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "[Add second test prompt for accessibility-audit]",
+      "expected_output": "[Describe expected output]",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "[Add edge case prompt for accessibility-audit]",
+      "expected_output": "[Describe expected handling of edge case]",
+      "files": []
+    }
+  ]
+}

@@ -290,3 +290,243 @@ total_coverage: [weighted average]
 source_contracts: [count]
 source_tokens: [count]
 ```
+
+
+
+## Additions: UX Blueprint — Named Flow Categories
+
+Add these under the `flows:` key in the UX blueprint:
+
+```yaml
+flows:
+  authentication:
+    type: "multi-step"
+    steps:
+      - screen: login
+        components: [TextField, Button, Link]
+        transitions: {success: dashboard, failure: error_state}
+      - screen: registration
+        components: [TextField, Button, Checkbox, Link]
+        transitions: {success: verification, failure: error_state}
+      - screen: password_reset
+        components: [TextField, Button]
+        transitions: {success: confirmation, failure: error_state}
+      - screen: session_expired
+        components: [Dialog, Button]
+        transitions: {reauth: login, cancel: logout}
+    error_paths:
+      - condition: "invalid credentials"
+        handling: "inline error, preserve input, suggest reset"
+      - condition: "account locked"
+        handling: "specific message with unlock timeframe"
+
+  data_entry:
+    type: "progressive"
+    patterns:
+      - single_field: "inline validation on blur"
+      - multi_field_form: "validate per field, summary on submit"
+      - multi_step_wizard: "progress indicator, save draft, back navigation"
+      - bulk_edit: "inline editing with batch save"
+    validation_timing:
+      - on_blur: "format validation"
+      - on_submit: "required fields, cross-field validation"
+      - real_time: "character count, password strength only"
+
+  navigation:
+    patterns:
+      - global_nav: "persistent, max 7 top-level items"
+      - local_nav: "contextual to section, collapses on mobile"
+      - breadcrumbs: "show path for >2 levels deep"
+      - deep_linking: "every view has a shareable URL"
+      - back_navigation: "browser back always works predictably"
+    wayfinding:
+      - "current location always visible"
+      - "path to any section ≤3 clicks from home"
+
+  feedback:
+    patterns:
+      - success: {component: Toast, duration: "3s auto-dismiss", position: "top-right"}
+      - error: {component: "inline or Banner", duration: "persistent until resolved", position: "adjacent to cause"}
+      - warning: {component: Banner, duration: "persistent until dismissed", position: "top of relevant section"}
+      - info: {component: Toast, duration: "5s auto-dismiss", position: "top-right"}
+      - progress: {component: "ProgressBar or Skeleton", duration: "until complete", position: "replacing content"}
+```
+
+## Additions: Content Blueprint — Terminology Glossary
+
+Add under a `terminology:` key:
+
+```yaml
+terminology:
+  glossary:
+    - term: "[domain term]"
+      definition: "[plain language definition]"
+      context: "[where this term appears in the UI]"
+      aliases: ["[other names users might use]"]
+      do_not_confuse_with: "[similar term with different meaning]"
+
+  disambiguation:
+    - term: "account"
+      contexts:
+        - context: "billing"
+          meaning: "payment and subscription management"
+        - context: "auth"
+          meaning: "user identity and credentials"
+      guidance: "Always qualify: 'billing account' or 'user account'"
+
+  abbreviations:
+    acceptable: ["URL", "PDF", "API", "FAQ"]
+    spell_out_first_use: ["SSO (single sign-on)", "MFA (multi-factor auth)"]
+    never_abbreviate: ["information (not 'info')", "application (not 'app' in formal contexts)"]
+```
+
+## Additions: Accessibility Blueprint — AT Matrix + Dark Mode Contrast
+
+```yaml
+assistive_technology:
+  support_matrix:
+    screen_readers:
+      - name: "VoiceOver"
+        platforms: ["macOS Safari", "iOS Safari"]
+        priority: "must pass"
+      - name: "NVDA"
+        platforms: ["Windows Chrome", "Windows Firefox"]
+        priority: "must pass"
+      - name: "JAWS"
+        platforms: ["Windows Chrome"]
+        priority: "should pass"
+      - name: "TalkBack"
+        platforms: ["Android Chrome"]
+        priority: "must pass"
+    testing_cadence: "every component release"
+    baseline: "task completion with screen reader only (no sighted assistance)"
+
+  dark_mode_contrast:
+    rules:
+      - "All AA contrast ratios must be met in BOTH light and dark modes"
+      - "Test with actual dark mode tokens, not inverted light mode"
+      - "Semantic color tokens must resolve to AA-passing values in both modes"
+      - "Focus indicators must be visible on dark backgrounds (use outline, not box-shadow)"
+      - "Elevation via lightness (not shadow) in dark mode — test contrast of stacked surfaces"
+    testing: "run contrast checks in both modes during every a11y audit"
+```
+
+## Additions: Ethical Blueprint — Bias Detection
+
+```yaml
+bias_detection:
+  signals:
+    narrowing_personalization:
+      pattern: "Recommendations that reduce variety over time"
+      test: "Does a new user see more options than a returning user?"
+      rule: "Personalization must expand discovery, not create filter bubbles"
+      example_bad: "Only showing content similar to past clicks"
+      example_good: "Mix of personalized + serendipitous discovery"
+
+    default_bias:
+      pattern: "Defaults that favor business over user"
+      test: "Would the user choose this default if presented all options equally?"
+      rule: "Defaults must serve user convenience, not business conversion"
+      example_bad: "Newsletter opt-in pre-checked"
+      example_good: "Newsletter opt-in unchecked, clear value proposition"
+
+    asymmetric_effort:
+      pattern: "Easy to add, hard to remove"
+      test: "Count steps to add vs remove. Ratio should be ≤1.5:1"
+      rule: "Removal must be as easy as addition"
+      example_bad: "1-click subscribe, 5-step unsubscribe"
+      example_good: "Subscribe/unsubscribe in same location, same steps"
+
+    anchoring:
+      pattern: "Price or option positioning that steers choice"
+      test: "Remove the 'decoy' option — does the preferred choice change?"
+      rule: "Options must be presented for comparison, not manipulation"
+      example_bad: "Expensive option shown first to make middle seem reasonable"
+      example_good: "Options ordered by feature set, not by margin"
+
+  audit_frequency: "quarterly, or when adding pricing, personalization, or notification features"
+```
+
+## Additions: Technical Blueprint — Event Signatures + Patterns
+
+```yaml
+  event_handlers:
+    [ComponentName]:
+      [handlerName]:
+        signature: "(event: [EventType], data: [DataType]) => void"
+        required: [boolean]
+        bubbles: [boolean]
+        description: "When this fires and what data it carries"
+
+  controlled_vs_uncontrolled:
+    pattern: "Support both via value/defaultValue convention"
+    rules:
+      - "If `value` prop is provided: component is controlled"
+      - "If `defaultValue` prop is provided: component is uncontrolled"
+      - "Never provide both — log a warning if consumer does"
+      - "onChange fires in both modes with the same signature"
+    components:
+      TextField: {controlled: "value + onChange", uncontrolled: "defaultValue"}
+      Checkbox: {controlled: "checked + onChange", uncontrolled: "defaultChecked"}
+      Select: {controlled: "value + onChange", uncontrolled: "defaultValue"}
+
+  polymorphic:
+    pattern: "as prop for render-as-different-element"
+    type: "<C extends React.ElementType = 'button'>"
+    rules:
+      - "Default element type matches semantic purpose (button for Button)"
+      - "Props extend the target element's native props"
+      - "Ref type matches the target element"
+    example: |
+      <Button as="a" href="/next">Continue</Button>
+      // Renders <a> with Button styling, href is type-safe
+```
+
+## Additions: BI Blueprint — Usage Analytics + Performance
+
+```yaml
+  usage_analytics:
+    component_render_frequency:
+      event: "component_rendered"
+      fields: [component_name, page, variant, viewport_size]
+      purpose: "Which components are most/least used"
+      threshold: "Alert if core component usage drops >20% week-over-week"
+
+    interaction_rates:
+      event: "component_interacted"
+      fields: [component_name, action_type, page, time_to_interact]
+      purpose: "Which interactive components are engaged with"
+
+    error_rates:
+      event: "component_error"
+      fields: [component_name, error_type, page, user_action_before]
+      purpose: "Which components generate the most user errors"
+      threshold: "Alert if error rate >5% for any component"
+
+    performance_impact:
+      metrics:
+        - component_render_time: "Time from mount to painted (ms)"
+        - component_bundle_size: "JS size per component (KB gzipped)"
+        - component_cls_contribution: "CLS caused by this component"
+      threshold: "Alert if render_time >100ms or CLS >0.05"
+      measurement: "RUM data, sampled in production"
+
+  ## UI Blueprint — Responsive Behavior Detail
+
+  responsive_rules:
+    approach: "mobile-first, enhance for larger"
+    breakpoints:
+      sm: {value: "640px", description: "Large phone / small tablet"}
+      md: {value: "768px", description: "Tablet portrait"}
+      lg: {value: "1024px", description: "Tablet landscape / small desktop"}
+      xl: {value: "1280px", description: "Desktop"}
+    component_adaptations:
+      Dialog: "Full-screen below md, centered modal above"
+      Navigation: "Bottom tabs below md, side nav above"
+      DataTable: "Card list below md, table above"
+      Form: "Single column below md, multi-column above lg"
+    token_changes:
+      spacing: "Reduce by one scale step below md"
+      typography: "Reduce display sizes by ~20% below md"
+      touch_targets: "Minimum 44px always, 48px on mobile"
+```
