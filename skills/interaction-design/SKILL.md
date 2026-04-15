@@ -156,3 +156,20 @@ Reduced motion: border change only, no scale
 | references/state-machines.md | State machine design patterns |
 | design-system/contracts/[name].contract.yaml | Component states |
 | design-system/patterns/ | Multi-component transition choreography |
+
+
+
+## Delegation to MC Dean's designer-skills
+
+When designer-skills is installed, delegate craft execution:
+
+| Interaction task | Your skill does | MC Dean's skill does |
+|-----------------|----------------|---------------------|
+| Micro-animation | Define timing constraints, reduced-motion reqs | Guide easing, choreography, feeling |
+| State machines | Define states from contract Dimension 5 | Guide transition logic, edge cases |
+| Gestures | Define platform constraints from Dimension 7 | Guide gesture patterns, feedback |
+| Loading patterns | Define skeleton shapes from contract anatomy | Guide timing, progressive disclosure |
+| Error recovery | Define error states from contract Dimension 5 | Guide recovery flows, messaging |
+
+Your skill owns the contract constraints.
+MC Dean's skill owns the interaction craft.

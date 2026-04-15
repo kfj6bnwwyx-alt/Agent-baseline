@@ -50,6 +50,14 @@ not full history. See `meta/context-strategy.md`.
 
 
 
+
+## Integration philosophy
+
+This kit owns the architecture. External plugins own the expertise.
+Skills load YOUR context (contracts, tokens), delegate EXECUTION to
+installed plugins, apply YOUR quality gates, and format output for
+the next chain step. See `meta/integration-philosophy.md` for details.
+
 ## External integrations
 
 This repo is designed to work alongside these external plugins and MCPs.

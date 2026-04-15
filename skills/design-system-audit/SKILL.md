@@ -160,3 +160,28 @@ alignment — producing a prioritized remediation roadmap.
 1. Run our design-system-audit for contract-level checks (7 dimensions)
 2. Run Murphy's audits for execution-level checks (token compliance, naming)
 3. Merge findings into a single dashboard
+
+
+
+## Delegation to Murphy's design-system-ops
+
+When the design-system-ops plugin is installed, delegate execution:
+
+| Audit type | Your skill does | Murphy's skill does |
+|-----------|----------------|-------------------|
+| Token audit | Define scope, load contracts | Run scan, produce dual score, remediation roadmap |
+| Component audit | Load 7-dim contract, define pass criteria | Run compliance check, map to WCAG/DTCG |
+| Naming audit | Define naming conventions from token schema | Scan codebase, flag inconsistencies |
+| Drift detection | Define drift thresholds from governance | Scan for hardcoded values, wrong-tier refs |
+| System health | Define health metrics from metrics-framework | Generate HTML dashboard with radar and cards |
+
+### Combined workflow pattern
+```
+1. YOUR skill: Load contract, define what "compliant" means per 7 dimensions
+2. MURPHY's skill: Execute the audit, produce scored findings
+3. YOUR skill: Apply quality gate logic (pass/fail/loop per chain)
+4. MURPHY's skill: Generate dashboard output
+```
+
+Your skill owns the architecture (what to check against).
+Murphy's skill owns the execution (how to check and score).

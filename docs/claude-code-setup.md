@@ -23,7 +23,33 @@ execution, and maintained rule sets.
 # Comprehensive design patterns, accessibility, modern patterns.
 /plugin marketplace add wshobson/agents
 /plugin install ui-ux-design@claude-code-workflows
+
+# MC Dean's designer-skills — 63 design skills across 6 domains
+# Research, UI design, interaction, validation, ops, writing.
+# These are the upstream source for many of our reference files.
+# Installing the actual pack means updates flow automatically.
+/plugin marketplace add Owl-Listener/designer-skills
+/plugin install designer-skills@designer-skills
+
+# MC Dean's inclusive-design-skills — cognitive a11y, adaptive interfaces
+/plugin marketplace add Owl-Listener/inclusive-design-skills
+/plugin install inclusive-design-skills@inclusive-design-skills
 ```
+
+## Step 1b: Understanding the integration model
+
+Your kit and the external plugins serve different purposes:
+
+| Layer | Your kit provides | External plugins provide |
+|-------|------------------|------------------------|
+| Knowledge | Contracts, tokens, patterns, four-layer architecture | Domain-specific methods, audit scripts |
+| Process | Chains, quality gates, context bridges | TDD enforcement, validation pipelines |
+| Orchestration | Agents, slash commands, routing | Slash commands within their domain |
+| Execution | Output specs, format templates | Actual scanning, scoring, dashboard generation |
+
+The principle: **your kit is the architecture, external plugins are the expertise.**
+When Murphy improves his token audit, you get it. When MC Dean adds a research
+method, it's available. Your skills orchestrate their execution against your contracts.
 
 ## Step 2: Configure MCP servers
 

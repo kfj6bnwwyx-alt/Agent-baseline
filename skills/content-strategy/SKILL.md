@@ -102,3 +102,17 @@ governance rules (who owns, update cadence, retirement criteria).
 | references/ia-patterns.md | Common IA patterns |
 | research/personas/ | Who's navigating this content |
 | product/product-brief.md | Product scope context |
+
+
+
+## Delegation to MC Dean's designer-skills
+
+When designer-skills is installed, her design-writing and design-ops
+plugins provide execution for:
+- IA card sorting and tree testing facilitation
+- Content audit frameworks
+- Taxonomy design methods
+- Navigation testing patterns
+
+Your skill defines the structure (what to organize).
+MC Dean's skill provides the method (how to organize it).

@@ -106,3 +106,29 @@ Load `references/usability-testing.md`, then produce:
 | references/usability-testing.md | Planning usability tests |
 | references/inclusive-research.md | Diverse or vulnerable populations |
 | research/templates/interview-guide.md | Interview guide template |
+
+
+
+## Delegation to MC Dean's designer-skills
+
+When designer-skills is installed, delegate method execution:
+
+| Research task | Your skill does | MC Dean's skill does |
+|--------------|----------------|---------------------|
+| Persona creation | Define output format, link to product context | Guide through demographics, goals, behaviors, context |
+| Journey mapping | Define touchpoints from your product, link to contracts | Facilitate stage × dimension mapping |
+| Interviews | Load product context, define research questions | Guide script creation, facilitation techniques |
+| Usability testing | Define tasks from acceptance criteria, link to contracts | Guide test plan, metrics, facilitation |
+| Synthesis | Define insight format for your team | Guide affinity diagramming, JTBD extraction |
+| Inclusive research | Load inclusive design requirements from ethical skill | Guide accommodation, recruitment, analysis |
+
+### Combined workflow pattern
+```
+1. YOUR skill: Load product context + relevant contracts + personas
+2. MC DEAN's skill: Execute the research method with domain expertise
+3. YOUR skill: Format output per your team's template
+4. YOUR skill: Feed output to the next chain step (via context bridge)
+```
+
+Your skill owns the context (what you're researching and why).
+MC Dean's skill owns the method (how to do the research well).

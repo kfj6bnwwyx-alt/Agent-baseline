@@ -143,3 +143,21 @@ Input: "Design the visual tokens for a Card component"
 | references/visual-hierarchy.md | Layout composition |
 | references/dark-mode.md | Theme and dark mode work |
 | design-system/contracts/[name].contract.yaml | Token mappings for specific components |
+
+
+
+## Delegation to MC Dean's designer-skills
+
+When designer-skills is installed, delegate craft execution:
+
+| Design task | Your skill does | MC Dean's skill does |
+|------------|----------------|---------------------|
+| Color system | Define token structure, brand constraints | Guide palette creation, harmony, contrast |
+| Typography | Define token scale, platform constraints | Guide type hierarchy, pairing, rhythm |
+| Visual hierarchy | Define component priority from contracts | Guide size/weight/color/space decisions |
+| Dark mode | Define semantic token requirements | Guide surface elevation, contrast, desaturation |
+| Spacing | Define scale from token schema | Guide rhythm, density, responsive adaptation |
+| Data viz | Define component contracts for chart types | Guide encoding, color, interaction patterns |
+
+Your skill owns the token architecture.
+MC Dean's skill owns the visual craft.

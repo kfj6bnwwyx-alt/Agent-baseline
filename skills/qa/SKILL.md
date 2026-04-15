@@ -109,3 +109,17 @@ Run existing test suite and flag new failures.
 | references/bug-report-template.md | Bug reporting |
 | design-system/contracts/[name].contract.yaml | Contract validation |
 | product/product-brief.md | Acceptance criteria source |
+
+
+
+## Delegation to MC Dean's designer-skills
+
+When designer-skills is installed, her design-validation plugin provides:
+- Heuristic evaluation frameworks
+- Usability issue severity scoring
+- Design QA checklists
+- Cross-device testing protocols
+
+Combined with your quality gate definitions, this creates a full
+validation pipeline: MC Dean's methods for finding issues, your
+quality gates for deciding whether to ship.
