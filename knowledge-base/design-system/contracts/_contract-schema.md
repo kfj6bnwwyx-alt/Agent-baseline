@@ -1,35 +1,171 @@
-# Contract Schema
+# Contract Schema — 7 Dimensions
 
-Every component contract is a YAML file with these sections:
+Every component contract is a YAML file with 7 dimensions. These are the
+complete specification — what a component is, how it looks, how it behaves,
+how it's used, and what it's not. Any platform implements against these.
+Any live preview renders the component alongside all 7.
 
+The contract is the permanent artifact. Figma, Windsurf, React — transient
+consumers. The contract outlives all of them.
+
+## The 7 dimensions
+
+### 1. API surface (props)
+The typed interface. What inputs the component accepts.
 ```yaml
-component: ComponentName           # PascalCase, matches code export
-category: action|input|layout|...  # Semantic grouping
-description: "..."                 # One-line purpose
-
-props:                             # Typed API surface
+props:
   propName:
     type: enum|boolean|string|number|IconName|ReactNode
     values: [...]                  # For enums
     default: value
     required: true|false
+    description: "Purpose"
+```
+Answers: **"What can I configure?"**
 
-tokens:                            # Token mappings per variant/state
-  background: semantic.token.name
-  text: semantic.token.name
+### 2. Visual specification (tokens)
+Every visual property maps to a design token. No magic numbers.
+```yaml
+tokens:
+  container:
+    background: action.primary.bg
+    text: action.primary.text
+    border-radius: radius.md
+  states:
+    hover: { background: action.primary.bg-hover }
+    focus: { ring: border.focus }
+    disabled: { background: surface.disabled, text: text.disabled }
+```
+Answers: **"What does it look like in every state?"**
 
-slots:                             # Composition points (optional)
-  - name: children
-    accepts: [Text, Icon]
-
+### 3. Accessibility requirements
+Non-negotiable structural requirements, not a post-hoc checklist.
+```yaml
 accessibility:
   role: button|dialog|...
   min-target: 44px
   focus-visible: required
-  aria-*: requirements
-
-rules:
-  do: ["Usage guidance"]
-  dont: ["Anti-patterns"]
-  forbidden-with: [ComponentName]  # Incompatible compositions
+  keyboard: { enter: activates, space: activates, tab: focus }
+  screen-reader: { loading: "announces Loading", disabled: "via aria-describedby" }
+  color-independence: "state changes never rely on color alone"
 ```
+Answers: **"Can everyone use it?"**
+
+### 4. Composition & anatomy
+How it's built from parts and where it lives.
+```yaml
+composition:
+  anatomy: [icon-leading, label, icon-trailing, loading-indicator]
+  slots:
+    - name: children
+      accepts: [Text, Icon]
+      required: true
+  nesting:
+    can-contain: [Icon, Badge]
+    contained-by: [ButtonGroup, Toolbar, Dialog.actions]
+```
+Answers: **"What's inside it, and where does it go?"**
+
+### 5. Behavior & states
+The state machine. Every state and transition.
+```yaml
+behavior:
+  states: [idle, hover, focus, active, loading, disabled]
+  transitions:
+    idle → hover: "mouse enter"
+    active → loading: "async operation triggered"
+    loading → idle: "on complete"
+  animation:
+    hover: "background 150ms ease-out"
+    active: "scale(0.98) 100ms ease-out"
+    reduced-motion: "instant, no transform"
+```
+Answers: **"How does it behave over time?"**
+
+### 6. Usage rules (do/don't)
+The opinion layer. Design decisions constraining correct use.
+```yaml
+rules:
+  do: ["Use primary for single main action per view"]
+  dont: ["Never more than one primary per section"]
+  forbidden-with: []
+  prefer-instead:
+    - "For navigation: use Link"
+    - "For toggles: use Toggle"
+```
+Answers: **"What's the right way to use it?"**
+
+### 7. Platform notes
+Platform-specific implementation details. Acknowledges platforms differ
+without breaking the universal contract.
+```yaml
+platform-notes:
+  web-react:
+    import: "import { Button } from '@system/ui'"
+    render-element: "<button> for actions, <a> when href provided"
+  ios-swiftui:
+    import: "import SystemUI"
+    modifier: ".buttonStyle(.systemPrimary)"
+  figma:
+    component-name: "Button"
+    variants: "variant × size matrix"
+```
+Answers: **"How do I use it on MY platform?"**
+
+---
+
+## Live preview specification
+
+Previews render the component alongside its 7 dimensions in whatever
+platform is current. The preview is a VIEW of the contract, not a
+separate artifact.
+
+### What the preview shows
+- Interactive component in all variants, sizes, and states
+- All 7 dimensions displayed alongside (tabs, panels, or cards)
+- Contract source path and last-updated date
+- Current compliance status
+
+### Platform-agnostic rendering
+| Context | Preview renders as |
+|---------|-------------------|
+| Claude.ai | HTML/React artifact with interactive controls |
+| Claude Code | Terminal markdown + optional HTML |
+| Figma | Component page with annotations via Console MCP |
+| Storybook | Story with controls + docs addon |
+| Standalone HTML | Pure HTML/CSS/JS, zero dependencies |
+| Future tool | Read contract YAML, render, show 7 dims |
+
+### Preview manifest (generated by context-engine)
+```json
+{
+  "component": "Button",
+  "contract": "contracts/button.contract.yaml",
+  "dimensions": {
+    "api": { "props": [...] },
+    "visual": { "tokens": {...}, "states": {...} },
+    "accessibility": { "role": "button", "keyboard": {...} },
+    "composition": { "anatomy": [...], "slots": [...] },
+    "behavior": { "states": [...], "transitions": [...] },
+    "rules": { "do": [...], "dont": [...] },
+    "platform": { "web-react": {...} }
+  },
+  "preview": {
+    "variants": ["primary","secondary","ghost","destructive"],
+    "sizes": ["sm","md","lg"],
+    "states": ["idle","hover","focus","loading","disabled"]
+  }
+}
+```
+
+Any renderer reads this manifest and knows exactly what to show.
+
+## Tool impermanence principle
+
+Every tool in the current stack will eventually be replaced. Figma,
+Windsurf, React, Claude — all transient. What survives: contract YAML,
+token JSON, pattern recipes. Plain text, readable by any future tool.
+
+The preview manifest bridges permanent contracts to whatever rendering
+platform exists today. When the platform changes, regenerate manifests.
+Contracts don't change.

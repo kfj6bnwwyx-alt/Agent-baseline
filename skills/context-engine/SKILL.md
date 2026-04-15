@@ -24,12 +24,22 @@ For each target tool:
 - **Canonical code examples**: One correct usage example per component
 - **Token usage rules**: How to reference tokens in code
 
+For each component (NEW):
+- **Preview manifest**: JSON file with all 7 contract dimensions
+  structured for any preview renderer to consume. This is the bridge
+  between the permanent contract and whatever rendering platform exists
+  today. When Figma or Storybook or whatever-comes-next needs to show
+  a component preview, it reads this manifest.
+
 ## Process
 
 1. Read ALL contracts from _index.md
 2. Read token schema
 3. For each target tool format, generate the context file
-4. Validate generated file includes every contract's component
+4. For each component contract, generate a preview manifest JSON
+   containing all 7 dimensions structured for rendering
+5. Validate generated files include every contract's component
+6. Validate every preview manifest covers all 7 dimensions
 
 ## Knowledge references
 

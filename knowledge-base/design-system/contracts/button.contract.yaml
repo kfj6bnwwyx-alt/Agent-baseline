@@ -1,12 +1,15 @@
 component: Button
 category: action
 description: "Primary interactive element for user actions"
+status: stable
 
+# ── Dimension 1: API surface ──
 props:
   variant:
     type: enum
     values: [primary, secondary, ghost, destructive]
     default: primary
+    description: "Visual treatment and semantic meaning"
   size:
     type: enum
     values: [sm, md, lg]
@@ -17,21 +20,111 @@ props:
   loading:
     type: boolean
     default: false
+  icon:
+    type: IconName | null
+    position: [leading, trailing]
+    default: null
 
+# ── Dimension 2: Visual specification ──
 tokens:
-  background: action.primary.bg
-  text: action.primary.text
-  border-radius: radius.md
+  container:
+    background: action.primary.bg
+    text: action.primary.text
+    border-radius: radius.md
+    padding: spacing.3 spacing.5
+    min-height: sizing.target.md
+    font-size: typography.fontSize.md
+    font-weight: typography.fontWeight.medium
+  states:
+    hover:
+      background: action.primary.bg-hover
+    focus:
+      ring: border.focus
+      ring-offset: 2px
+    active:
+      background: action.primary.bg-active
+    disabled:
+      background: surface.disabled
+      text: text.disabled
+      cursor: not-allowed
 
+# ── Dimension 3: Accessibility ──
 accessibility:
   role: button
   min-target: 44px
   focus-visible: required
+  keyboard:
+    enter: activates
+    space: activates
+    tab: receives focus in natural order
+  screen-reader:
+    loading: "announces 'Loading' when loading state activates"
+    disabled: "announces disabled reason via aria-describedby"
+  color-independence: "state changes never rely on color alone"
+  aria-disabled: "when disabled=true, prefer aria-disabled over disabled attribute"
 
+# ── Dimension 4: Composition & anatomy ──
+composition:
+  anatomy:
+    - icon-leading (optional, hidden when loading)
+    - label (required, visible text content)
+    - icon-trailing (optional, hidden when loading)
+    - loading-indicator (replaces content when loading=true)
+  slots:
+    - name: children
+      accepts: [Text, Icon]
+      required: true
+  nesting:
+    can-contain: [Icon, Badge]
+    contained-by: [ButtonGroup, Toolbar, Form, Dialog.actions]
+
+# ── Dimension 5: Behavior & states ──
+behavior:
+  states: [idle, hover, focus, active, loading, disabled]
+  transitions:
+    idle → hover: "mouse enter / pointer over"
+    hover → idle: "mouse leave"
+    hover → active: "mouse down / touch start"
+    active → idle: "mouse up (sync action)"
+    active → loading: "when onClick triggers async operation"
+    loading → idle: "on success or error"
+  constraints:
+    - "loading=true disables all interaction"
+    - "disabled=true prevents focus on web"
+  animation:
+    hover: "background-color 150ms ease-out"
+    active: "transform scale(0.98) 100ms ease-out"
+    loading-indicator: "opacity pulse 1.5s ease-in-out infinite"
+    reduced-motion: "instant state change, no transform"
+
+# ── Dimension 6: Usage rules ──
 rules:
   do:
-    - "Use primary for single main action per view"
-    - "Include loading state for async operations"
+    - "Use primary for the single main action per view"
+    - "Include loading state for any async operation"
+    - "Use ghost variant for secondary actions in toolbars"
+    - "Pair destructive variant with a confirmation dialog"
   dont:
-    - "Never more than one primary per section"
-    - "Never disable without visible explanation"
+    - "Never use more than one primary button per section"
+    - "Never disable without a visible, accessible explanation"
+    - "Never use a button for navigation (use Link instead)"
+    - "Never put a button inside another button"
+  prefer-instead:
+    - "For navigation: use Link component"
+    - "For toggles: use Toggle component"
+    - "For icon-only actions: use IconButton component"
+
+# ── Dimension 7: Platform notes ──
+platform-notes:
+  web-react:
+    import: "import { Button } from '@system/ui'"
+    render-element: "<button> for actions, <a> when href provided"
+    ref-forwarding: required
+  ios-swiftui:
+    import: "import SystemUI"
+    modifier: ".buttonStyle(.systemPrimary)"
+    haptics: "light impact on press"
+  figma:
+    component-name: "Button"
+    variants: "variant × size matrix (4 × 3 = 12 variants)"
+    description: "Primary interactive element. 4 variants, 3 sizes, loading + disabled states."
