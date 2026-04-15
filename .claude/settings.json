@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "notification_hooks": [
+      {
+        "event": "subagent_completed",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Subagent completed — check output quality'"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Grep(**)",
+      "Glob(**)"
+    ]
+  }
+}

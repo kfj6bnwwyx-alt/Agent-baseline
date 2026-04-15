@@ -1,0 +1,31 @@
+# Design Ops Kit — Windsurf Rules
+# Generated from skills + knowledge-base
+# Copy to your project root as .windsurfrules
+
+## Design system
+- NEVER use Material UI (@mui/*), Chakra UI (@chakra-ui/*), or shadcn
+- All components MUST conform to Layer 2 contracts in knowledge-base/design-system/contracts/
+- All visual values MUST reference design tokens — never hardcode colors, spacing, font sizes
+- Read the contract schema: knowledge-base/design-system/contracts/_contract-schema.md
+
+## When building components
+1. Load the component contract first
+2. Implement all 7 dimensions (API, visual, a11y, composition, behavior, rules, platform)
+3. Include all states from Dimension 5 (idle, hover, focus, active, loading, disabled)
+4. Accessible by default per Dimension 3
+5. Co-locate tests
+
+## When reviewing code
+1. Check contract compliance (props, types, defaults)
+2. Check token discipline (no hardcoded values)
+3. Check blocked packages
+4. Check accessibility requirements from contract
+
+## Skill reference
+For complex tasks, reference the relevant skill in skills/ for detailed process.
+For chains (multi-step workflows), see orchestration/chains/.
+
+## Context management
+- Load knowledge files conditionally — don't read everything
+- Between multi-step tasks, produce structured summaries not full replays
+- If context feels bloated (>40K tokens of history), start a new session with a handoff doc

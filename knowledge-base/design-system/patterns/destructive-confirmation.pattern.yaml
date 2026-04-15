@@ -1,0 +1,52 @@
+pattern: destructive-confirmation
+description: "Confirms a destructive action before executing it"
+status: stable
+
+uses:
+  - Dialog
+  - Button(variant: destructive)
+  - Button(variant: ghost)
+
+composition:
+  trigger: "User initiates a destructive action (delete, remove, revoke)"
+  flow:
+    - Dialog opens with descriptive body naming the specific item
+    - Two actions: cancel (ghost, left) and confirm (destructive, right)
+    - Confirm button is NEVER the default focus
+    - Body text must name the specific item being destroyed
+    - Include consequence statement ("This cannot be undone")
+
+behavior:
+  states: [closed, open-idle, confirming, confirmed]
+  transitions:
+    closed → open-idle: "destructive action initiated"
+    open-idle → closed: "cancel clicked or Escape pressed"
+    open-idle → confirming: "confirm clicked"
+    confirming → confirmed: "action succeeds"
+    confirming → open-idle: "action fails (show error, keep dialog open)"
+  focus:
+    on-open: "cancel button (safe default)"
+    on-close: "return to trigger element"
+
+accessibility:
+  aria-modal: true
+  role: alertdialog
+  aria-describedby: "body text describing consequences"
+  keyboard:
+    escape: closes dialog (same as cancel)
+    tab: cycles between cancel and confirm only
+    enter: activates focused button
+
+rules:
+  do:
+    - "Name the specific item being destroyed in the body text"
+    - "Use 'Delete [item name]' as confirm label, not just 'Delete' or 'OK'"
+    - "Include undo option post-confirmation when technically possible"
+  dont:
+    - "Never auto-focus the destructive confirm button"
+    - "Never use this pattern for reversible actions (use inline undo instead)"
+    - "Never dismiss on backdrop click for destructive confirmations"
+
+platform-notes:
+  web-react: "Use Dialog component with role='alertdialog'"
+  ios-swiftui: "Use .confirmationDialog with destructive role on action"
