@@ -137,3 +137,28 @@ Check tech-stack.md for blocked packages.
 | references/anti-patterns.md | Framework-specific checks |
 | references/performance-budget.md | Performance reviews |
 | meta/four-layer-strategy.summary.md | Design system code reviews |
+
+
+
+## Integration with Vercel web-design-guidelines
+
+When Vercel's web-design-guidelines skill is available, add a 7th
+review layer:
+
+**Layer 7 — Web interface guidelines (100+ rules):**
+The guidelines cover areas that are easy to miss under time pressure:
+- Proper ARIA attributes and semantic HTML
+- Visible focus states on all interactive elements
+- Labeled inputs (not placeholder-as-label)
+- Touch target sizes (44px minimum)
+- Reduced-motion support for all animations
+- Proper heading hierarchy (no skipped levels)
+- Keyboard navigation for all interactions
+
+The guidelines are maintained by Vercel Engineering and fetch from
+a live source, so rules stay current without manual updates.
+
+To activate during review:
+```
+Review this code using our 6-layer process AND Vercel's web-design-guidelines
+```

@@ -62,3 +62,41 @@ and how to stay current with their updates.
 4. Re-run trigger evals to verify no regressions
 5. Update "Last synced" date in this file
 6. Commit with message: "sync: [repo-name] [version/date]"
+
+
+
+### Superpowers (Jesse Vincent / obra)
+- **Repo**: https://github.com/obra/superpowers
+- **What we use**: TDD enforcement, two-stage review, quality gate pattern
+- **Maps to skills**: code-gen (TDD integration), code-review (quality gates)
+- **Install**: `/plugin marketplace add obra/superpowers-marketplace`
+- **Last synced**: [date]
+- **Watch for**: New skill additions, updated enforcement patterns
+
+### Vercel web-design-guidelines
+- **Repo**: https://github.com/vercel-labs/agent-skills
+- **Skill path**: skills/web-design-guidelines/
+- **What we use**: 100+ UI/UX rules for code review Layer 7
+- **Maps to skills**: code-review (additional rule set)
+- **Last synced**: [date]
+- **Watch for**: New rules added, existing rules updated
+
+### Playwright MCP
+- **Source**: @anthropic/mcp-playwright (npm)
+- **What we use**: Browser automation for a11y scanning, visual regression
+- **Maps to agents**: accessibility-reviewer (automated scanning)
+- **Last synced**: [date]
+- **Watch for**: New capabilities, API changes
+
+### wshobson/agents
+- **Repo**: https://github.com/wshobson/agents
+- **What we use**: UI/UX design plugin for design system context
+- **Install**: `/plugin marketplace add wshobson/agents`
+- **Last synced**: [date]
+- **Watch for**: UI/UX plugin updates, new design-related agents
+
+### airowe/claude-a11y-skill
+- **Repo**: https://github.com/airowe/claude-a11y-skill
+- **What we use**: Reference for axe-core + jsx-a11y scan integration
+- **Maps to skills**: accessibility-audit (scan execution pattern)
+- **Last synced**: [date]

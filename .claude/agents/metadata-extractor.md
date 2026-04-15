@@ -6,7 +6,7 @@ description: >
 model: haiku
 tools: [Read, Write, Bash, Grep]
 skills: [metadata-extraction]
-mcpServers: [figma-console-mcp]
+mcpServers: [figma-console-mcp, figma]
 ---
 
 You extract structured metadata from Figma and transform it into

@@ -48,6 +48,32 @@ Skills use progressive disclosure (L1 → L2 → L3). Agents get fresh
 context windows. Between chain steps, use structured bridges (~500 tokens)
 not full history. See `meta/context-strategy.md`.
 
+
+
+## External integrations
+
+This repo is designed to work alongside these external plugins and MCPs.
+See `docs/claude-code-setup.md` for install commands.
+
+### Superpowers (obra/superpowers)
+TDD enforcement and quality gates. When installed, code-gen follows
+test-first workflow and two-stage review (spec compliance, then quality).
+Superpowers enforces structure; our skills provide design system knowledge.
+
+### Design System Ops (murphytrueman/design-system-ops)
+DS practitioner skill pack. Adds dual-scoring audits, HTML dashboards,
+token audit scripts, and chained pre-release validation. Complements
+our contract-level auditing with execution-level checking.
+
+### Playwright MCP
+Browser automation for real accessibility scanning, visual regression
+testing, and interaction verification. Transforms our a11y skill from
+checklist-based to execution-based.
+
+### Figma MCP
+Design tool connection for token extraction, component metadata, and
+design parity checking. Used by metadata-extractor agent.
+
 ## Upstream repos
 
 This kit integrates patterns from:

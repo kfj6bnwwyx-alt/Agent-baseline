@@ -106,3 +106,48 @@ Check against form-related WCAG criteria:
 | accessibility/cognitive-load.md | Cognitive a11y concerns |
 | accessibility/plain-language.md | Content accessibility |
 | design-system/contracts/[name].contract.yaml | Checking component a11y reqs |
+
+
+
+## Automated scanning (requires Playwright MCP)
+
+When Playwright MCP is available, run actual scans instead of just
+checking manually:
+
+### axe-core scan
+```
+1. Navigate to the component's Storybook URL or test page
+2. Run axe-core scan via Playwright
+3. Capture all violations with WCAG criterion, impact, and DOM selector
+4. Cross-reference violations against the component's contract Dimension 3
+5. Produce findings with both the axe-core output AND the contract gap
+```
+
+### Keyboard navigation test
+```
+1. Navigate to the component
+2. Tab through all interactive elements via Playwright keyboard API
+3. Verify focus order matches contract specification
+4. Test Enter, Space, Escape, Arrow key behaviors
+5. Capture any focus traps or dead ends
+```
+
+### Visual regression for a11y
+```
+1. Capture screenshot at default state
+2. Capture screenshot with forced-colors mode (Windows high contrast)
+3. Capture screenshot at 200% zoom
+4. Compare against baseline — flag any layout breakage
+```
+
+## Integration with Murphy's a11y audit
+
+If design-system-ops is installed, Murphy's accessibility-audit skill
+produces dual scoring (thoroughness vs compliance) and maps findings to
+specific WCAG criteria. Use his output format when both are available —
+it's more structured than ours.
+
+Combined workflow:
+1. Run Murphy's a11y audit for structured findings
+2. Run Playwright scans for automated verification
+3. Merge findings, deduplicate, produce combined report

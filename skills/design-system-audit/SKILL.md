@@ -131,3 +131,32 @@ Output: Compliance report with specific file:line references for every violation
 | design-system/tokens/_schema.md | Token audits only |
 | meta/four-layer-strategy.summary.md | System-level audits |
 | meta/four-layer-strategy.md | Full system health audits only |
+
+
+
+## Integration with Murphy's design-system-ops
+
+When the design-system-ops plugin is installed, Murphy's audit skills
+add capabilities beyond our process:
+
+### Dual scoring
+Murphy's audits separate two scores:
+- **Thoroughness**: How complete was the audit? (Did it check everything?)
+- **Compliance**: How compliant is the component? (Did it pass?)
+
+A thorough audit with low compliance = "we found a lot of issues."
+A shallow audit with high compliance = "it looks OK but we didn't check deeply."
+
+### HTML dashboard generation
+Murphy's system-health skill generates self-contained HTML dashboards
+with health radar, severity distribution, priority matrix, and metric
+cards. Open in any browser, no dependencies.
+
+### Token audit with DTCG alignment
+Murphy's token-audit checks naming, coverage, AND DTCG standard
+alignment — producing a prioritized remediation roadmap.
+
+### Combined workflow
+1. Run our design-system-audit for contract-level checks (7 dimensions)
+2. Run Murphy's audits for execution-level checks (token compliance, naming)
+3. Merge findings into a single dashboard

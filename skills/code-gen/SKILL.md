@@ -132,3 +132,31 @@ Input: "Implement the Button component in React from its contract"
 | meta/four-layer-strategy.summary.md | Always — layer context |
 | engineering/code-standards.md | Always |
 | engineering/tech-stack.md | First invocation per session |
+
+
+
+## Integration with Superpowers TDD
+
+When Superpowers is installed, code generation follows TDD enforcement:
+
+### Modified process
+1. Load the component contract (unchanged)
+2. **Write failing tests FIRST** from the contract
+   - Contract tests: each variant, each prop, each default
+   - A11y tests: keyboard, ARIA, focus, screen reader
+   - Interaction tests: state transitions from Dimension 5
+3. Run tests — verify they fail (RED)
+4. Implement the component to make tests pass (GREEN)
+5. Refactor for code quality (REFACTOR)
+6. Run design-system-audit quality gate
+
+Superpowers enforces this order — it will reject code written before
+tests exist. This ensures every component has contract coverage from
+the start, not tests added after the fact.
+
+### Two-stage review (from Superpowers)
+After implementation:
+1. **Spec compliance review**: Does the code match the contract?
+2. **Code quality review**: Is the code clean, performant, idiomatic?
+
+Both must pass before the component is considered complete.
