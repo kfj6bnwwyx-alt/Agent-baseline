@@ -1,0 +1,37 @@
+component: Button
+category: action
+description: "Primary interactive element for user actions"
+
+props:
+  variant:
+    type: enum
+    values: [primary, secondary, ghost, destructive]
+    default: primary
+  size:
+    type: enum
+    values: [sm, md, lg]
+    default: md
+  disabled:
+    type: boolean
+    default: false
+  loading:
+    type: boolean
+    default: false
+
+tokens:
+  background: action.primary.bg
+  text: action.primary.text
+  border-radius: radius.md
+
+accessibility:
+  role: button
+  min-target: 44px
+  focus-visible: required
+
+rules:
+  do:
+    - "Use primary for single main action per view"
+    - "Include loading state for async operations"
+  dont:
+    - "Never more than one primary per section"
+    - "Never disable without visible explanation"

@@ -1,0 +1,5 @@
+.role.yaml
+adapters/windsurf/.windsurfrules
+adapters/cursor/.cursorrules
+adapters/claude-code/CLAUDE.md
+.DS_Store

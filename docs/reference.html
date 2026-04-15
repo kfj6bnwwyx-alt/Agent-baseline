@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Ops Kit — Reference</title>
+<style>
+:root {
+  --bg: #fafaf8;
+  --surface: #fff;
+  --surface-2: #f5f4f0;
+  --text: #1a1a18;
+  --text-m: #5c5b57;
+  --text-l: #8a8983;
+  --border: #e4e3dd;
+  --accent: #4338ca;
+  --accent-dim: #eef2ff;
+  --green: #0d7d4d;
+  --green-dim: #ecfdf5;
+  --amber: #b45309;
+  --amber-dim: #fffbeb;
+  --red: #b91c1c;
+  --red-dim: #fef2f2;
+  --coral: #c2410c;
+  --coral-dim: #fff7ed;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "SF Mono", "Fira Code", "Consolas", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111110;
+    --surface: #1c1c1a;
+    --surface-2: #252523;
+    --text: #e8e7e3;
+    --text-m: #a3a29c;
+    --text-l: #6b6a65;
+    --border: #333330;
+    --accent: #818cf8;
+    --accent-dim: #1e1b4b;
+    --green: #34d399;
+    --green-dim: #052e16;
+    --amber: #fbbf24;
+    --amber-dim: #451a03;
+    --red: #f87171;
+    --red-dim: #450a0a;
+    --coral: #fb923c;
+    --coral-dim: #431407;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.65; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
+h2 { font-size: 18px; font-weight: 600; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 15px; font-weight: 600; margin: 24px 0 8px; }
+p { color: var(--text-m); font-size: 15px; margin-bottom: 12px; }
+.subtitle { font-size: 15px; color: var(--text-l); margin-bottom: 32px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { font-family: var(--mono); font-size: 13px; background: var(--surface-2); padding: 2px 6px; border-radius: 4px; }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 16px 0; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+.card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.card-desc { font-size: 13px; color: var(--text-m); line-height: 1.5; }
+
+/* Status badges */
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px; letter-spacing: 0.02em; }
+.badge-ready { background: var(--green-dim); color: var(--green); }
+.badge-stub { background: var(--amber-dim); color: var(--amber); }
+.badge-placeholder { background: var(--red-dim); color: var(--red); }
+.badge-chain { background: var(--accent-dim); color: var(--accent); }
+
+/* Stat row */
+.stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0 32px; }
+.stat { background: var(--surface-2); border-radius: 8px; padding: 12px 16px; min-width: 100px; }
+.stat-val { font-size: 22px; font-weight: 600; }
+.stat-label { font-size: 12px; color: var(--text-l); margin-top: 2px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0 20px; }
+th { text-align: left; font-weight: 600; font-size: 12px; color: var(--text-l); text-transform: uppercase; letter-spacing: 0.04em; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+
+/* Tradeoff section */
+.tradeoff { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 12px 0; }
+.tradeoff-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.tradeoff-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.tradeoff-give .tradeoff-icon { background: var(--red-dim); color: var(--red); }
+.tradeoff-get .tradeoff-icon { background: var(--green-dim); color: var(--green); }
+.tradeoff-title { font-size: 14px; font-weight: 600; }
+.tradeoff-body { font-size: 13px; color: var(--text-m); line-height: 1.6; padding-left: 28px; }
+
+/* Chain viz */
+.chain-flow { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin: 8px 0 16px; }
+.chain-step { font-size: 12px; padding: 4px 10px; background: var(--surface-2); border-radius: 6px; white-space: nowrap; }
+.chain-arrow { color: var(--text-l); font-size: 12px; }
+
+/* Tabs */
+.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+.tab { padding: 10px 18px; font-size: 14px; font-weight: 500; color: var(--text-l); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; }
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Updated timestamp */
+.updated { font-size: 12px; color: var(--text-l); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Design Ops Kit</h1>
+  <p class="subtitle">Portable skills system for product-to-engineering workflows. This document is the living reference — it grows as the repo grows.</p>
+  <p class="updated">Last generated: <span id="timestamp"></span></p>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="tabs" id="tab-bar"></div>
+  <div id="tab-panels"></div>
+</div>
+
+<script>
+// ──────────────────────────────────────────────
+// DATA — Update this section as the repo grows
+// ──────────────────────────────────────────────
+
+const SKILLS = [
+  { name: "orchestrator", status: "ready", lines: 292, refs: 0, domain: "system",
+    desc: "Routes prompts to skills, manages context budgets, chains workflows. The control plane." },
+  { name: "design-system-audit", status: "ready", lines: 62, refs: 0, domain: "design",
+    desc: "Audits tokens, components, naming, drift, and system health against contracts." },
+  { name: "metadata-extraction", status: "ready", lines: 42, refs: 1, domain: "design",
+    desc: "Extracts component metadata from Figma via Console MCP, transforms to L1 tokens and L2 contracts." },
+  { name: "context-engine", status: "ready", lines: 41, refs: 1, domain: "design",
+    desc: "Generates Layer 3 context files from tokens and contracts. Keeps AI tools constrained to your system." },
+  { name: "code-gen", status: "ready", lines: 42, refs: 0, domain: "engineering",
+    desc: "Generates production code conforming to design system contracts. Consumes tokens, implements contracts." },
+  { name: "ux-design", status: "ready", lines: 27, refs: 3, domain: "design",
+    desc: "User flows, wireframes, interaction patterns, navigation architecture." },
+  { name: "ui-design", status: "ready", lines: 27, refs: 2, domain: "design",
+    desc: "Visual design: typography, color, spacing, theming, brand application." },
+  { name: "accessibility-audit", status: "ready", lines: 30, refs: 3, domain: "design",
+    desc: "WCAG 2.2 AA auditing, ARIA patterns, cognitive accessibility, inclusive design." },
+  { name: "user-research", status: "ready", lines: 31, refs: 6, domain: "research",
+    desc: "Personas, journey maps, interviews, usability testing, synthesis, JTBD." },
+  { name: "product-brief", status: "ready", lines: 21, refs: 1, domain: "product",
+    desc: "PRDs, requirements, user stories, acceptance criteria." },
+  { name: "governance", status: "ready", lines: 29, refs: 1, domain: "design",
+    desc: "Contribution workflows, deprecation, versioning, drift monitoring, health reporting." },
+  { name: "code-review", status: "ready", lines: 50, refs: 2, domain: "engineering",
+    desc: "PR review, refactoring, anti-pattern detection." },
+  { name: "architecture", status: "ready", lines: 50, refs: 1, domain: "engineering",
+    desc: "System design, data modeling, API design, ADRs." },
+  { name: "testing", status: "ready", lines: 50, refs: 1, domain: "engineering",
+    desc: "Test plans, unit tests, integration tests." },
+  { name: "qa", status: "ready", lines: 50, refs: 1, domain: "quality",
+    desc: "Bug triage, regression testing, release validation." },
+  { name: "competitive-audit", status: "ready", lines: 50, refs: 1, domain: "research",
+    desc: "Competitive analysis, market landscape, benchmarking." },
+  { name: "prioritization", status: "ready", lines: 50, refs: 1, domain: "product",
+    desc: "Roadmap decisions, RICE scoring, tradeoff analysis." },
+  { name: "content-strategy", status: "ready", lines: 50, refs: 1, domain: "research",
+    desc: "Information architecture, content audit, taxonomy." },
+  { name: "documentation", status: "ready", lines: 50, refs: 0, domain: "quality",
+    desc: "Technical docs, API docs, ADRs, onboarding guides." },
+  { name: "interaction-design", status: "ready", lines: 50, refs: 2, domain: "design",
+    desc: "Micro-animations, state machines, gestures, feedback loops." },
+];
+
+const CHAINS = [
+  { name: "new-component", steps: ["metadata-extraction", "ux-design", "ui-design", "code-gen", "accessibility-audit", "testing"],
+    trigger: '"new component", "build from scratch"', cost: "~17K" },
+  { name: "figma-to-code", steps: ["metadata-extraction", "context-engine", "code-gen"],
+    trigger: '"sync from Figma", "extract and build"', cost: "~14K" },
+  { name: "feature-review", steps: ["design-system-audit", "accessibility-audit", "code-review", "qa"],
+    trigger: '"full review", "pre-release check"', cost: "~32K (parallel)" },
+  { name: "system-health", steps: ["design-system-audit", "design-system-audit", "governance", "accessibility-audit", "governance"],
+    trigger: '"how healthy", "system health"', cost: "~26K" },
+];
+
+const KNOWLEDGE = [
+  { path: "design-system/tokens/_schema.md", status: "ready", desc: "DTCG format, naming conventions" },
+  { path: "design-system/tokens/color.tokens.json", status: "placeholder", desc: "Starter token file — replace with your tokens" },
+  { path: "design-system/contracts/_contract-schema.md", status: "ready", desc: "Contract YAML format specification" },
+  { path: "design-system/contracts/_index.md", status: "ready", desc: "Component catalog with status" },
+  { path: "design-system/contracts/button.contract.yaml", status: "ready", desc: "Example contract — Button" },
+  { path: "design-system/patterns/_pattern-schema.md", status: "ready", desc: "Pattern recipe format" },
+  { path: "accessibility/wcag-checklist.md", status: "ready", desc: "Full WCAG 2.2 AA checklist" },
+  { path: "accessibility/wcag-checklist.summary.md", status: "ready", desc: "Summary for non-specialist skills" },
+  { path: "engineering/tech-stack.md", status: "placeholder", desc: "Your stack decisions — replace" },
+  { path: "engineering/code-standards.md", status: "placeholder", desc: "Your code standards — replace" },
+  { path: "brand/brand-guidelines.md", status: "placeholder", desc: "Your brand — replace" },
+  { path: "operations/handoff-spec-template.md", status: "ready", desc: "Session handoff template" },
+  { path: "research/templates/interview-guide.md", status: "ready", desc: "User interview guide" },
+  { path: "product/product-brief.md", status: "placeholder", desc: "Your product brief — replace" },
+];
+
+const TRADEOFFS = {
+  give: [
+    { title: "Granular skill triggers are less precise than slash commands",
+      body: "Consolidating 63 designer-skills into 19 means each skill has a broader trigger surface. A dedicated /usability-test-plan command is more precise than relying on the user-research skill to detect that intent from natural language. You trade trigger precision for context budget savings. Mitigation: write pushy descriptions and test with trigger evals." },
+    { title: "No real-time subagent orchestration on Windsurf or Claude.ai",
+      body: "Parallel fan-out (feature-review running 4 agents simultaneously) only works in Claude Code with subagents. On Windsurf and Claude.ai, chains run sequentially in one context window, which means accumulated history. The session bridge pattern mitigates this but adds manual session breaks." },
+    { title: "Reference files are stubs until you populate them",
+      body: "The kit ships with placeholder TODO files for most L3 references. Skills that rely on these (persona frameworks, interaction patterns, anti-patterns) will produce generic output until you fill them with content from designer-skills, design-system-ops, inclusive-design-skills, and your own team knowledge." },
+    { title: "Adapter generator is a stub",
+      body: "The generate.py script has the right interface but no implementation. Until built, you're manually creating .windsurfrules and .cursorrules from the skill content. This is the highest-priority build item." },
+    { title: "Progressive disclosure depends on the LLM following instructions",
+      body: "Conditional file loading ('read this ONLY when doing X') relies on the model respecting the conditions in SKILL.md. In practice, models sometimes over-load or under-load references. There's no runtime enforcement — it's instruction-following, not access control." },
+    { title: "No automatic context budget tracking",
+      body: "The orchestrator defines thresholds (>80K = session break) but can't actually measure token usage in most runtimes. Context budget management is advisory, not enforced. You rely on the model self-monitoring, which is imperfect." },
+    { title: "Contract maintenance is a team discipline",
+      body: "The metadata-extraction → context-engine pipeline automates syncing Figma to contracts, but someone still has to run it. If contracts drift from implementations and nobody runs the pipeline, the system degrades silently. Murphy's drift-detection skill helps but needs to be run regularly." },
+    { title: "Single-orchestrator design creates a routing bottleneck",
+      body: "Every multi-step request routes through the orchestrator skill, which adds ~300 lines to L2 context. For simple single-skill tasks, this overhead is wasted. The routing table mitigates by short-circuiting direct matches, but the orchestrator body is still loaded." },
+  ],
+  get: [
+    { title: "60-70% context savings on multi-step workflows",
+      body: "The context bridge pattern (500-token summaries between steps) versus naive sequential execution (full history carried forward) saves 40-45K tokens on a 6-step chain like new-component. This is the difference between completing the chain and running out of context mid-task on a 128K window." },
+    { title: "Portable across every current and future tool",
+      body: "Layer A (knowledge) and Layer B (skills) are plain markdown and YAML. They work on Claude Code, Claude.ai, Windsurf, Cursor, Codex CLI, Gemini CLI, and anything that reads text files. Only Layer C (adapters) is tool-specific, and it's generated." },
+    { title: "Team-ready with role-based activation",
+      body: "A PM loads 3 skills at ~3K overhead. An engineer loads 5 at ~5K. Nobody carries anyone else's context weight. Onboarding is: clone, set role, run generator." },
+    { title: "Design system as executable infrastructure",
+      body: "The four-layer architecture + metadata extraction pipeline means your design system isn't documentation — it's a machine-readable contract that constrains AI output to only approved components. No hallucinated UI." },
+    { title: "Survives tool extinction",
+      body: "~90% of the system is permanent (markdown, YAML, JSON, Python scripts). The ~10% that's tool-specific (YAML frontmatter, .skill packaging, adapter configs) is either trivially re-authored or generated by a script." },
+    { title: "Knowledge compounds across projects",
+      body: "Every contract you write, every pattern you define, every research template you refine — it all lives in the knowledge base and carries to the next project. The kit is a growing asset, not a per-project cost." },
+  ]
+};
+
+const MISSING_CHAINS = [
+  { name: "design-to-handoff", steps: ["ux-design", "ui-design", "documentation"],
+    why: "Designers need a chain that takes a concept through visual spec to a structured handoff document. Currently they'd run 3 skills manually." },
+  { name: "research-to-requirements", steps: ["user-research", "competitive-audit", "product-brief"],
+    why: "Discovery work should flow directly into requirements. Researchers produce insights, the orchestrator should bridge to PRD generation." },
+  { name: "component-update", steps: ["metadata-extraction", "design-system-audit", "code-gen", "testing"],
+    why: "Updating an existing component (not creating new). Extract current Figma state, audit drift from contract, generate fix, test." },
+  { name: "a11y-remediation", steps: ["accessibility-audit", "code-gen", "testing"],
+    why: "Audit finds issues, code-gen fixes them, testing validates. Currently manual between audit findings and fixes." },
+  { name: "token-migration", steps: ["metadata-extraction", "design-system-audit", "context-engine", "governance"],
+    why: "When tokens change (rebrand, scale update): extract new values, audit impact, regenerate context files, document the change." },
+  { name: "sprint-kickoff", steps: ["product-brief", "ux-design", "prioritization"],
+    why: "PM defines the sprint scope, UX breaks it into flows, prioritization sequences the work. Common weekly workflow." },
+];
+
+const OPTIMIZATIONS = [
+  { area: "Orchestrator weight reduction",
+    detail: "The orchestrator SKILL.md is 292 lines. Most of that is the routing table and chain definitions. Consider moving chain definitions to L3 references that load conditionally — the orchestrator body should only contain the routing table and execution mode logic (~100 lines). Chains load only when a multi-step workflow is detected.",
+    impact: "Save ~3K tokens on every conversation that triggers the orchestrator" },
+  { area: "Shared knowledge deduplication",
+    detail: "Several skills reference the same knowledge-base files (contract schema, token schema, strategy summary). If 3 skills are active in a chain, the same file could be loaded 3 times. The orchestrator should track which files are already in context and tell later steps 'already loaded, skip'.",
+    impact: "Prevent 2-5K of redundant reference loading per chain" },
+  { area: "Summary cascading for deep chains",
+    detail: "In a 6-step chain, step 6 currently only sees the bridge from step 5. But it might need context from step 2's decision. Consider a cumulative summary that grows ~100 tokens per step instead of replacing the full bridge.",
+    impact: "Better decision coherence in long chains without full history cost" },
+  { area: "Lazy skill resolution",
+    detail: "Currently all 19+ L1 descriptions are always in context. Consider grouping skills by domain and only loading domain descriptions after the orchestrator identifies the domain. Two-phase: orchestrator routes to domain → domain loads skill descriptions.",
+    impact: "Reduce L1 overhead from ~2K to ~500 tokens for focused tasks" },
+  { area: "Contract caching across sessions",
+    detail: "Component contracts don't change often but get re-loaded every session. Consider a manifest with content hashes — if the hash matches what was loaded last session, skip the re-read and use a one-line 'contract unchanged since [date]' stub.",
+    impact: "Save 2-4K per session for projects with stable contracts" },
+  { area: "Eval-driven description tuning",
+    detail: "None of the 19 skills have trigger eval sets yet. Until you run trigger evals, you're guessing at description effectiveness. The skill-creator framework supports automated optimization loops.",
+    impact: "Could improve trigger accuracy from ~70% (estimated) to 90%+" },
+];
+
+// ──────────────────────────────────────────────
+// RENDER
+// ──────────────────────────────────────────────
+
+document.getElementById("timestamp").textContent = new Date().toLocaleDateString("en-US", {
+  year: "numeric", month: "long", day: "numeric"
+});
+
+// Stats
+const ready = SKILLS.filter(s => s.status === "ready").length;
+const stubs = SKILLS.filter(s => s.status === "stub").length;
+const kbReady = KNOWLEDGE.filter(k => k.status === "ready").length;
+const kbPlaceholder = KNOWLEDGE.filter(k => k.status === "placeholder").length;
+
+document.getElementById("stats").innerHTML = `
+  <div class="stat"><div class="stat-val">${SKILLS.length}</div><div class="stat-label">Skills</div></div>
+  <div class="stat"><div class="stat-val">${ready}</div><div class="stat-label">Ready</div></div>
+  <div class="stat"><div class="stat-val">${stubs}</div><div class="stat-label">Stubs</div></div>
+  <div class="stat"><div class="stat-val">${CHAINS.length}</div><div class="stat-label">Chains</div></div>
+  <div class="stat"><div class="stat-val">${KNOWLEDGE.length}</div><div class="stat-label">Knowledge files</div></div>
+  <div class="stat"><div class="stat-val">${kbReady}</div><div class="stat-label">KB ready</div></div>
+`;
+
+// Tabs
+const tabs = [
+  { id: "skills", label: "Skills" },
+  { id: "chains", label: "Chains" },
+  { id: "knowledge", label: "Knowledge base" },
+  { id: "tradeoffs", label: "Tradeoffs" },
+  { id: "optimize", label: "Optimizations" },
+];
+
+const tabBar = document.getElementById("tab-bar");
+const panels = document.getElementById("tab-panels");
+
+tabs.forEach((t, i) => {
+  const tab = document.createElement("div");
+  tab.className = "tab" + (i === 0 ? " active" : "");
+  tab.textContent = t.label;
+  tab.onclick = () => {
+    document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach(el => el.classList.remove("active"));
+    tab.classList.add("active");
+    document.getElementById("panel-" + t.id).classList.add("active");
+  };
+  tabBar.appendChild(tab);
+});
+
+// ── Skills panel ──
+const domainOrder = ["system", "product", "research", "design", "engineering", "quality"];
+const domainLabels = { system: "System", product: "Product & Strategy", research: "Research & Discovery", design: "Design", engineering: "Engineering", quality: "Quality & Operations" };
+
+let skillsHTML = "";
+domainOrder.forEach(domain => {
+  const domainSkills = SKILLS.filter(s => s.domain === domain);
+  if (domainSkills.length === 0) return;
+  skillsHTML += `<h3>${domainLabels[domain]}</h3><div class="card-grid">`;
+  domainSkills.forEach(s => {
+    skillsHTML += `<div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span class="card-title">${s.name}</span>
+        <span class="badge badge-${s.status}">${s.status}</span>
+      </div>
+      <div class="card-desc">${s.desc}</div>
+      <div style="margin-top:8px;font-size:11px;color:var(--text-l)">${s.lines} lines · ${s.refs} refs</div>
+    </div>`;
+  });
+  skillsHTML += `</div>`;
+});
+const skillsPanel = document.createElement("div");
+skillsPanel.id = "panel-skills";
+skillsPanel.className = "tab-panel active";
+skillsPanel.innerHTML = `<p>20 skills across 6 domains. <span class="badge badge-ready">ready</span> skills have full SKILL.md bodies with conditional knowledge tables. <span class="badge badge-stub">stub</span> skills have frontmatter and routing wired but need body content.</p>${skillsHTML}`;
+panels.appendChild(skillsPanel);
+
+// ── Chains panel ──
+let chainsHTML = `<p>${CHAINS.length} defined chains. ${MISSING_CHAINS.length} recommended additions below.</p><h3>Active chains</h3>`;
+CHAINS.forEach(c => {
+  chainsHTML += `<div class="card" style="margin-bottom:8px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+      <span class="card-title">${c.name}</span>
+      <span class="badge badge-chain">${c.cost}</span>
+    </div>
+    <div class="chain-flow">${c.steps.map(s => `<span class="chain-step">${s}</span><span class="chain-arrow">→</span>`).join("").slice(0, -31)}</div>
+    <div style="font-size:12px;color:var(--text-l)">Trigger: ${c.trigger}</div>
+  </div>`;
+});
+
+chainsHTML += `<h3>Recommended additions</h3><p>These cover common workflows that currently require manual multi-skill invocation.</p>`;
+MISSING_CHAINS.forEach(c => {
+  chainsHTML += `<div class="card" style="margin-bottom:8px;border-style:dashed">
+    <div class="card-title">${c.name}</div>
+    <div class="chain-flow">${c.steps.map(s => `<span class="chain-step">${s}</span><span class="chain-arrow">→</span>`).join("").slice(0, -31)}</div>
+    <div class="card-desc">${c.why}</div>
+  </div>`;
+});
+
+const chainsPanel = document.createElement("div");
+chainsPanel.id = "panel-chains";
+chainsPanel.className = "tab-panel";
+chainsPanel.innerHTML = chainsHTML;
+panels.appendChild(chainsPanel);
+
+// ── Knowledge panel ──
+let kbHTML = `<p>${KNOWLEDGE.length} tracked knowledge files. <span class="badge badge-ready">ready</span> files have real content. <span class="badge badge-placeholder">placeholder</span> files need your team's content.</p>
+<table><thead><tr><th>Path</th><th>Status</th><th>Description</th></tr></thead><tbody>`;
+KNOWLEDGE.forEach(k => {
+  kbHTML += `<tr><td><code>${k.path}</code></td><td><span class="badge badge-${k.status}">${k.status}</span></td><td>${k.desc}</td></tr>`;
+});
+kbHTML += `</tbody></table>`;
+const kbPanel = document.createElement("div");
+kbPanel.id = "panel-knowledge";
+kbPanel.className = "tab-panel";
+kbPanel.innerHTML = kbHTML;
+panels.appendChild(kbPanel);
+
+// ── Tradeoffs panel ──
+let tradeHTML = `<p>What you lose and what you gain with this approach, assessed honestly.</p><h3>What you're giving up</h3>`;
+TRADEOFFS.give.forEach(t => {
+  tradeHTML += `<div class="tradeoff tradeoff-give">
+    <div class="tradeoff-header"><div class="tradeoff-icon">−</div><div class="tradeoff-title">${t.title}</div></div>
+    <div class="tradeoff-body">${t.body}</div>
+  </div>`;
+});
+tradeHTML += `<h3>What you're getting</h3>`;
+TRADEOFFS.get.forEach(t => {
+  tradeHTML += `<div class="tradeoff tradeoff-get">
+    <div class="tradeoff-header"><div class="tradeoff-icon">+</div><div class="tradeoff-title">${t.title}</div></div>
+    <div class="tradeoff-body">${t.body}</div>
+  </div>`;
+});
+const tradePanel = document.createElement("div");
+tradePanel.id = "panel-tradeoffs";
+tradePanel.className = "tab-panel";
+tradePanel.innerHTML = tradeHTML;
+panels.appendChild(tradePanel);
+
+// ── Optimizations panel ──
+let optHTML = `<p>Where to invest next for maximum context efficiency gains.</p>`;
+OPTIMIZATIONS.forEach((o, i) => {
+  optHTML += `<div class="card" style="margin-bottom:10px">
+    <div class="card-title">${i + 1}. ${o.area}</div>
+    <div class="card-desc" style="margin:6px 0">${o.detail}</div>
+    <div style="font-size:12px;color:var(--green);font-weight:500">Impact: ${o.impact}</div>
+  </div>`;
+});
+optHTML += `<h3>Missing chains to build</h3><p>See the Chains tab for 6 recommended chain additions. Priority order:</p>
+<table><thead><tr><th>#</th><th>Chain</th><th>Why it's high priority</th></tr></thead><tbody>
+<tr><td>1</td><td><code>component-update</code></td><td>Most common workflow — updating existing components is more frequent than creating new ones</td></tr>
+<tr><td>2</td><td><code>a11y-remediation</code></td><td>Closes the loop between finding a11y issues and fixing them automatically</td></tr>
+<tr><td>3</td><td><code>token-migration</code></td><td>Rebrands and scale updates are high-risk without automation</td></tr>
+<tr><td>4</td><td><code>design-to-handoff</code></td><td>Designer → engineer handoff is the most common cross-role workflow</td></tr>
+<tr><td>5</td><td><code>research-to-requirements</code></td><td>Bridges discovery to definition — common gap in product orgs</td></tr>
+<tr><td>6</td><td><code>sprint-kickoff</code></td><td>Weekly cadence workflow — high frequency, moderate complexity</td></tr>
+</tbody></table>`;
+
+const optPanel = document.createElement("div");
+optPanel.id = "panel-optimize";
+optPanel.className = "tab-panel";
+optPanel.innerHTML = optHTML;
+panels.appendChild(optPanel);
+</script>
+</body>
+</html>

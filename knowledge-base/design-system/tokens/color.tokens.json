@@ -1,0 +1,12 @@
+{
+  "color": {
+    "$description": "Replace with your actual color tokens",
+    "action": {
+      "primary": {
+        "$value": "{color.indigo.600}",
+        "$type": "color",
+        "$description": "Primary action background"
+      }
+    }
+  }
+}

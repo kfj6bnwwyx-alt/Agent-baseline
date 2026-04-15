@@ -1,0 +1,4 @@
+# Copy to .role.yaml and set your role.
+role: design-systems-lead
+# Roles: design-systems-lead, product-designer, ux-researcher,
+#        product-owner, frontend-engineer, qa-engineer
